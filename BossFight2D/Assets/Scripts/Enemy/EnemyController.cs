@@ -14,6 +14,7 @@ public class EnemyController : MonoBehaviour
    
     void Update()
     {
+        if(Player !=null){
         if (Player.position.x > transform.position.x)
         {
             transform.position += Vector3.right*speed*Time.deltaTime;
@@ -21,6 +22,7 @@ public class EnemyController : MonoBehaviour
         if (Player.position.x < transform.position.x)
         {
             transform.position += Vector3.left*speed*Time.deltaTime;
+        }
         }
         
     }
