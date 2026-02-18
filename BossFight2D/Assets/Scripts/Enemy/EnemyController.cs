@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField]float speed =3f;
+    private Transform Player;
     void Start()
     {
-        
+        Player=GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    // Update is called once per frame
+   
     void Update()
     {
+        if (Player.position.x > transform.position.x)
+        {
+            transform.position += Vector3.right*speed*Time.deltaTime;
+        }
+        if (Player.position.x < transform.position.x)
+        {
+            transform.position += Vector3.left*speed*Time.deltaTime;
+        }
         
     }
 }
