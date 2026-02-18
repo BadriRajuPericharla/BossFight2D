@@ -10,8 +10,8 @@ public class PlayerHealth : MonoBehaviour
     {
         CurrentHealth=MaxHealth;
     }
+   
 
-    
     public void TakeDamage(int Damage)
     {
         CurrentHealth-=Damage;
@@ -31,7 +31,7 @@ public class PlayerHealth : MonoBehaviour
         if (collision.gameObject.tag == "Health")
         {
             CurrentHealth=MaxHealth;
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
         }
     }
 }
