@@ -72,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (collision.gameObject.tag == "Enemy")
         {
+            Debug.Log("collided");
             GetComponent<PlayerHealth>().TakeDamage(10);
             collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(30);
         }
