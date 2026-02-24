@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
         Rb=GetComponent<Rigidbody2D>();
         Sr=GetComponent<SpriteRenderer>();
         animator=GetComponent<Animator>();
-        Rb.freezeRotation=true;
+        // Rb.freezeRotation=true;
     }
 
     
@@ -42,16 +42,22 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("IsRun", false);
         }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            animator.SetBool("IsAttack",true);
+        }
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            animator.SetBool("IsAttack",false);
+        }
 
         if (MoveInput > 0)
         {
-            Sr.flipX=false;
-            
+            transform.rotation = Quaternion.Euler(0, 0, 0);
         }
-        if (MoveInput < 0)
+        else if (MoveInput < 0)
         {
-            Sr.flipX=true;
-            
+            transform.rotation = Quaternion.Euler(0, 180, 0);
         }
         
     }
