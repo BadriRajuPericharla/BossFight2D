@@ -70,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
          
            
         }
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy"&&Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("collided");
             GetComponent<PlayerHealth>().TakeDamage(10);
