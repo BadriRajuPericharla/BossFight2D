@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]float Speed=10f;
     [SerializeField]float JumpForce=5f;
     [SerializeField]int JumpCount=0;
+    [SerializeField]private GameObject FirePoint;
     Rigidbody2D Rb;
     SpriteRenderer Sr;
     Animator animator;
@@ -27,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     {
        float MoveInput=Input.GetAxis("Horizontal");
        Rb.velocity=new Vector2(MoveInput*Speed,Rb.velocity.y);
-        if (Input.GetKeyDown(KeyCode.UpArrow)&& JumpCount<=3)
+        if (Input.GetKeyDown(KeyCode.UpArrow)&& JumpCount<2)
         {
             Rb.velocity=new Vector2(Rb.velocity.x,JumpForce);
            
@@ -53,11 +54,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (MoveInput > 0)
         {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            transform.localScale= new Vector3(2.5f,2.5f,2.5f);
+            FirePoint.transform.localRotation=Quaternion.Euler(0,0,0);
         }
         else if (MoveInput < 0)
         {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+            transform.localScale= new Vector3(-2.5f,2.5f,2.5f);
+            FirePoint.transform.localRotation=Quaternion.Euler(0,180,0);
         }
         
     }
@@ -66,14 +69,12 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             JumpCount=0;
-            animator.SetBool("IsJump",false);
-         
-           
+            animator.SetBool("IsJump",false);  
         }
+        
         if (collision.gameObject.tag == "Enemy"&&Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("collided");
-            GetComponent<PlayerHealth>().TakeDamage(10);
             collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(30);
         }
     }
