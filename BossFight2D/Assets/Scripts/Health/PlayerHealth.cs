@@ -6,6 +6,7 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] float MaxHealth=100f;
     public float CurrentHealth;
+    [SerializeField]private GameObject FillArea;
     void Start()
     {
         CurrentHealth=MaxHealth;
@@ -19,6 +20,7 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log("Damage");
         if (CurrentHealth <= 0)
         {
+            FillArea.SetActive(false);
             Die();
         }
     }

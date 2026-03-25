@@ -7,9 +7,10 @@ using UnityEngine.Rendering;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]float Speed=10f;
-    [SerializeField]float JumpForce=5f;
+    [SerializeField]float JumpForce=8f;
     [SerializeField]int JumpCount=0;
     [SerializeField]private GameObject FirePoint;
+    [SerializeField]private GameObject HitPoint;
     Rigidbody2D Rb;
     SpriteRenderer Sr;
     Animator animator;
@@ -46,10 +47,12 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             animator.SetBool("IsAttack",true);
+            HitPoint.SetActive(true);
         }
         if (Input.GetKeyUp(KeyCode.E))
         {
             animator.SetBool("IsAttack",false);
+            HitPoint.SetActive(false);
         }
 
         if (MoveInput > 0)

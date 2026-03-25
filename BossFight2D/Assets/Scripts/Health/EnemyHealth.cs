@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] float MaxHealth=1000f;
+    [SerializeField]private GameObject FillArea;
     public float CurrentHealth;
     void Start()
     {
@@ -16,6 +17,7 @@ public class EnemyHealth : MonoBehaviour
         CurrentHealth=Mathf.Clamp(CurrentHealth,0,MaxHealth);
         if (CurrentHealth <= 0)
         {
+            FillArea.SetActive(false);
             Die();
         }
 
