@@ -434,7 +434,7 @@ GameObject:
   - component: {fileID: 121345350}
   m_Layer: 0
   m_Name: EndColliders
-  m_TagString: Untagged
+  m_TagString: End
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -486,7 +486,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 9.214142}
+  m_Offset: {x: 0.41776562, y: 9.214142}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -497,7 +497,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 29.595314}
+  m_Size: {x: 1.8355312, y: 29.595314}
   m_EdgeRadius: 0
 --- !u!1 &134792306
 GameObject:
@@ -1636,7 +1636,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 3
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 6d063595902f2ab40af15583e8c709fe, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -5763,7 +5763,7 @@ GameObject:
   - component: {fileID: 2057797696}
   m_Layer: 0
   m_Name: EndColliders-1
-  m_TagString: Untagged
+  m_TagString: End
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5800,7 +5800,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 8.908857}
+  m_Offset: {x: -0.31946802, y: 8.908857}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -5811,7 +5811,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 28.984745}
+  m_Size: {x: 1.638936, y: 28.984745}
   m_EdgeRadius: 0
 --- !u!4 &2057797697
 Transform:
