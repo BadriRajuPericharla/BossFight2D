@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] float MaxHealth=100f;
     public float CurrentHealth;
     [SerializeField]private GameObject FillArea;
+    [SerializeField]private GameObject GameOver;
     void Start()
     {
         CurrentHealth=MaxHealth;
@@ -27,6 +28,7 @@ public class PlayerHealth : MonoBehaviour
     public void Die()
     {
         Destroy(gameObject);
+        GameOver.SetActive(true);
     }
     void OnTriggerEnter2D(Collider2D collision)
     {

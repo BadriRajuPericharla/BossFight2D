@@ -8,6 +8,9 @@ public class UI : MonoBehaviour
     [SerializeField]GameObject GameOver;
     [SerializeField]GameObject Settings;
     [SerializeField]MonoBehaviour movement;
+    [SerializeField]PlayerMovement playerMovement;
+    [SerializeField]EnemyController enemyController;
+    [SerializeField]private GameObject healthBars;
     [SerializeField]GameObject score;
     [SerializeField]GameObject settingIcon;
 
@@ -17,10 +20,14 @@ public class UI : MonoBehaviour
     
     void Start()
     {
+        
 
         if (SkipMenu && MainMenu!=null)
         {
             MainMenu.SetActive(false);
+            Time.timeScale=1;
+            settingIcon.SetActive(true);
+           healthBars.SetActive(true);
             SkipMenu=false;
             movement.enabled=true;
         }
@@ -29,6 +36,8 @@ public class UI : MonoBehaviour
             if (MainMenu != null)
             {
                 MainMenu.SetActive(true);
+                playerMovement.enabled=false;
+                enemyController.enabled=false;
                 movement.enabled=false;
             }
             
@@ -68,6 +77,7 @@ public class UI : MonoBehaviour
         
         GameOver.SetActive(false);
         Settings.SetActive(true);
+        Time.timeScale=0f;
     }
     public void Home()
     {
@@ -84,6 +94,7 @@ public class UI : MonoBehaviour
     public void Resume()
     {
         Settings.SetActive(false);
+        Time.timeScale=1f;
         
     }
     
