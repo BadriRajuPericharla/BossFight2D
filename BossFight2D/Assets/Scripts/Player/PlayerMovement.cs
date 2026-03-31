@@ -13,14 +13,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]private GameObject HitPoint;
     Rigidbody2D Rb;
     SpriteRenderer Sr;
-    Animator animator;
+    [SerializeField]private Animator animator;
    
     
     void Start()
     {
         Rb=GetComponent<Rigidbody2D>();
         Sr=GetComponent<SpriteRenderer>();
-        animator=GetComponent<Animator>();
         // Rb.freezeRotation=true;
     }
 
