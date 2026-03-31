@@ -8,6 +8,10 @@ public class PlayerHealth : MonoBehaviour
     public float CurrentHealth;
     [SerializeField]private GameObject FillArea;
     [SerializeField]private GameObject GameOver;
+    [SerializeField]private Animator PlayerAnimator;
+    [SerializeField]private Animator enemyAnimator;
+    [SerializeField]private EnemyController enemyController;
+
     void Start()
     {
         CurrentHealth=MaxHealth;
@@ -22,11 +26,15 @@ public class PlayerHealth : MonoBehaviour
         if (CurrentHealth <= 0)
         {
             FillArea.SetActive(false);
-            Die();
+            StartCoroutine(Die());
         }
     }
-    public void Die()
+    IEnumerator Die()
     {
+        enemyController.enabled=false;
+        PlayerAnimator.SetBool("IsDie",true);
+        enemyAnimator.SetBool("IsWin",true);
+        yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
         GameOver.SetActive(true);
     }

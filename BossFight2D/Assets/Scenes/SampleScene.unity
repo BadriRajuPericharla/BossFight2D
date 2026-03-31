@@ -1678,7 +1678,6 @@ MonoBehaviour:
   healthBars: {fileID: 37409849}
   score: {fileID: 0}
   settingIcon: {fileID: 688439200}
-  enemyHealth: {fileID: 1343118648}
 --- !u!224 &448046141
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2174,6 +2173,9 @@ MonoBehaviour:
   CurrentHealth: 0
   FillArea: {fileID: 214641562}
   GameOver: {fileID: 1599920942}
+  PlayerAnimator: {fileID: 583317589}
+  enemyAnimator: {fileID: 558274307}
+  enemyController: {fileID: 1343118644}
 --- !u!95 &583317589
 Animator:
   serializedVersion: 5
@@ -3792,7 +3794,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26c43b2a0fb831d49836b9da623e9c5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 1000
   FillArea: {fileID: 135377817}
   EnemyAnimator: {fileID: 558274307}
   PlayerAnimator: {fileID: 583317589}
