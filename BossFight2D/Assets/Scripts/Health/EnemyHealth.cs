@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] float MaxHealth=1000f;
+    public static float MaxHealth=1000f;
     [SerializeField]private GameObject FillArea;
+    [SerializeField]private Animator EnemyAnimator;
+    [SerializeField]private Animator PlayerAnimator;
+    [SerializeField]private PlayerMovement playerMovement;
+    [SerializeField]private GameObject LevelComplete;
     public float CurrentHealth;
     void Start()
     {
@@ -18,12 +22,17 @@ public class EnemyHealth : MonoBehaviour
         if (CurrentHealth <= 0)
         {
             FillArea.SetActive(false);
-            Die();
+            StartCoroutine(Die());
         }
 
     }
-    public void Die()
+    IEnumerator Die()
     {
-        Destroy(gameObject);
+        EnemyAnimator.SetBool("IsDie",true);
+        PlayerAnimator.SetBool("IsWin",true);
+        playerMovement.enabled=false;
+        LevelComplete.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        gameObject.SetActive(false);
     }
 }

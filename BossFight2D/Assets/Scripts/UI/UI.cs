@@ -13,6 +13,7 @@ public class UI : MonoBehaviour
     [SerializeField]private GameObject healthBars;
     [SerializeField]GameObject score;
     [SerializeField]GameObject settingIcon;
+   
 
     
     
@@ -27,7 +28,7 @@ public class UI : MonoBehaviour
             MainMenu.SetActive(false);
             Time.timeScale=1;
             settingIcon.SetActive(true);
-           healthBars.SetActive(true);
+            healthBars.SetActive(true);
             SkipMenu=false;
             movement.enabled=true;
         }
@@ -85,7 +86,9 @@ public class UI : MonoBehaviour
     }
     public void Next()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+        EnemyHealth.MaxHealth+=200;
+        SkipMenu=true;
+        SceneManager.LoadScene(0);
     }
     public void Replay()
     {
