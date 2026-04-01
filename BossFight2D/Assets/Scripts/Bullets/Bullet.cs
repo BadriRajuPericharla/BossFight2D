@@ -20,8 +20,10 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             Destroy(gameObject);
-            collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(30);
-            enemyDamage.slider.value-=30f;
+            collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(20);
+            
+            enemyDamage.slider.value-=20f;
+            
 
         }
         if (collision.gameObject.tag == "End")

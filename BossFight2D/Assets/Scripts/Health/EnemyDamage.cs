@@ -13,6 +13,7 @@ public class EnemyDamage : MonoBehaviour
         {
             enemyHealth.TakeDamage(30);
             slider.value-=30f;
+           
         }
     }
 }

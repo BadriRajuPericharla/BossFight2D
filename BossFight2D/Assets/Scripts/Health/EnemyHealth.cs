@@ -9,8 +9,11 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField]private Animator EnemyAnimator;
     [SerializeField]private Animator PlayerAnimator;
     [SerializeField]private PlayerMovement playerMovement;
+    [SerializeField]private EnemyController enemyController;
     [SerializeField]private GameObject LevelComplete;
+    [SerializeField]private SpawnParticles spawnParticles;
     public float CurrentHealth;
+    public int damageCounter;
     void Start()
     {
         CurrentHealth=MaxHealth;
@@ -19,6 +22,11 @@ public class EnemyHealth : MonoBehaviour
     {
         CurrentHealth-=Damage;
         CurrentHealth=Mathf.Clamp(CurrentHealth,0,MaxHealth);
+        damageCounter+=Damage;
+        while (damageCounter >= 100)
+        {
+            StartCoroutine(SpecialAttack());
+        }
         if (CurrentHealth <= 0)
         {
             FillArea.SetActive(false);
@@ -34,5 +42,13 @@ public class EnemyHealth : MonoBehaviour
         LevelComplete.SetActive(true);
         yield return new WaitForSeconds(2f);
         gameObject.SetActive(false);
+    }
+    IEnumerator SpecialAttack()
+    {
+        spawnParticles.SpawnSpikes();
+        damageCounter=0;
+        enemyController.enabled=false;
+        yield return new WaitForSeconds(3f);
+        enemyController.enabled=true;
     }
 }
