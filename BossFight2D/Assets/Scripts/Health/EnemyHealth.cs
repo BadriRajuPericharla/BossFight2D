@@ -14,6 +14,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField]private SpawnParticles spawnParticles;
     public float CurrentHealth;
     public int damageCounter;
+    bool isSpecialAttacking=false;
     void Start()
     {
         CurrentHealth=MaxHealth;
@@ -23,8 +24,9 @@ public class EnemyHealth : MonoBehaviour
         CurrentHealth-=Damage;
         CurrentHealth=Mathf.Clamp(CurrentHealth,0,MaxHealth);
         damageCounter+=Damage;
-        while (damageCounter >= 100)
+        if(damageCounter >= 100&&!isSpecialAttacking)
         {
+            damageCounter-=100;
             StartCoroutine(SpecialAttack());
         }
         if (CurrentHealth <= 0)
@@ -45,10 +47,11 @@ public class EnemyHealth : MonoBehaviour
     }
     IEnumerator SpecialAttack()
     {
+        isSpecialAttacking=true;
         spawnParticles.SpawnSpikes();
-        damageCounter=0;
         enemyController.enabled=false;
         yield return new WaitForSeconds(3f);
+        isSpecialAttacking=false;
         enemyController.enabled=true;
     }
 }
