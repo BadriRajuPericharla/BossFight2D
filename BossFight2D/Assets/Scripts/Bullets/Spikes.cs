@@ -9,9 +9,7 @@ public class Spikes : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            Animator Player=collision.GetComponent<Animator>();
-            PlayerMovement Playermov=collision.GetComponent<PlayerMovement>();
-            StartCoroutine(Dizzy(Player,Playermov));
+            collision.gameObject.GetComponent<PlayerDizzy>().StartDizzy();
             gameObject.SetActive(false);
         }
         if (collision.gameObject.tag == "End")
@@ -19,13 +17,5 @@ public class Spikes : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
-    IEnumerator Dizzy(Animator Anim,PlayerMovement move)
-    {
-        Anim.SetBool("IsDizzy",true);
-        move.enabled=false;
-        yield return new WaitForSeconds(4);
-        Anim.SetBool("IsDizzy",false);
-        move.enabled=true;
-        
-    }
+    
 }
