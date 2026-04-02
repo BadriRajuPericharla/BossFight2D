@@ -12,8 +12,8 @@ public class PlayerDamage : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            playerHealth.TakeDamage(5);
-            slider.value-=5f;
+            playerHealth.TakeDamage(10);
+            slider.value-=10f;
     
         }
     }

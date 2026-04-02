@@ -10,6 +10,8 @@ public class UI : MonoBehaviour
     [SerializeField]MonoBehaviour movement;
     [SerializeField]PlayerMovement playerMovement;
     [SerializeField]EnemyController enemyController;
+    [SerializeField]private PlayerShoot bulletScript;
+    [SerializeField]private Spikes spikesScript;
     [SerializeField]private GameObject healthBars;
     [SerializeField]GameObject score;
     [SerializeField]GameObject settingIcon;
@@ -21,14 +23,14 @@ public class UI : MonoBehaviour
     
     void Start()
     {
-        
-
         if (SkipMenu && MainMenu!=null)
         {
             MainMenu.SetActive(false);
             Time.timeScale=1;
             settingIcon.SetActive(true);
             healthBars.SetActive(true);
+            spikesScript.enabled=true;
+            bulletScript.enabled=true;
             SkipMenu=false;
             movement.enabled=true;
         }
@@ -39,6 +41,8 @@ public class UI : MonoBehaviour
                 MainMenu.SetActive(true);
                 playerMovement.enabled=false;
                 enemyController.enabled=false;
+                spikesScript.enabled=false;
+                bulletScript.enabled=false;
                 movement.enabled=false;
             }
             

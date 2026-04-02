@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]int JumpCount=0;
     [SerializeField]private GameObject FirePoint;
     [SerializeField]private GameObject HitPoint;
+    
     Rigidbody2D Rb;
     SpriteRenderer Sr;
     [SerializeField]private Animator animator;
@@ -26,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()
     {
+        
        float MoveInput=Input.GetAxis("Horizontal");
        Rb.velocity=new Vector2(MoveInput*Speed,Rb.velocity.y);
         if (Input.GetKeyDown(KeyCode.UpArrow)&& JumpCount<2)
@@ -72,12 +74,6 @@ public class PlayerMovement : MonoBehaviour
         {
             JumpCount=0;
             animator.SetBool("IsJump",false);  
-        }
-        
-        if (collision.gameObject.tag == "Enemy"&&Input.GetKeyDown(KeyCode.E))
-        {
-            Debug.Log("collided");
-            collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(30);
         }
     }
 
