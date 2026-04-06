@@ -21,8 +21,12 @@ public class UI : MonoBehaviour
     
     static bool SkipMenu=false;
     
+    
+    
     void Start()
     {
+        
+        
         if (SkipMenu && MainMenu!=null)
         {
             MainMenu.SetActive(false);
@@ -91,6 +95,7 @@ public class UI : MonoBehaviour
     public void Next()
     {
         EnemyHealth.MaxHealth+=200;
+        PlayerPrefs.Save();
         SkipMenu=true;
         SceneManager.LoadScene(0);
     }

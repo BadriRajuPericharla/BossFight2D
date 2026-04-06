@@ -42,7 +42,7 @@ public class PlayerHealth : MonoBehaviour
         enemyController.enabled=false;
         PlayerAnimator.SetBool("IsDie",true);
         enemyAnimator.SetBool("IsWin",true);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
         GameOver.SetActive(true);
     }
