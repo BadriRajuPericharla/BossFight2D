@@ -24,9 +24,9 @@ public class EnemyHealth : MonoBehaviour
         CurrentHealth-=Damage;
         CurrentHealth=Mathf.Clamp(CurrentHealth,0,MaxHealth);
         damageCounter+=Damage;
-        if(damageCounter >= 100&&!isSpecialAttacking)
+        if(damageCounter >= 250&&!isSpecialAttacking)
         {
-            damageCounter-=100;
+            damageCounter-=250;
             StartCoroutine(SpecialAttack());
         }
         if (CurrentHealth <= 0)
@@ -48,9 +48,11 @@ public class EnemyHealth : MonoBehaviour
     IEnumerator SpecialAttack()
     {
         isSpecialAttacking=true;
+        EnemyAnimator.SetBool("SpecialAttack",true);
         spawnParticles.SpawnSpikes();
         enemyController.enabled=false;
         yield return new WaitForSeconds(3f);
+        EnemyAnimator.SetBool("SpecialAttack",false);
         isSpecialAttacking=false;
         enemyController.enabled=true;
     }
