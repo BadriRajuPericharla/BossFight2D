@@ -17,6 +17,7 @@ public class EnemyHealth : MonoBehaviour
     bool isSpecialAttacking=false;
     void Start()
     {
+        MaxHealth=PlayerPrefs.GetFloat("EnemyMaxHealth",1000);
         CurrentHealth=MaxHealth;
     }
     public void TakeDamage(int Damage)
@@ -24,14 +25,15 @@ public class EnemyHealth : MonoBehaviour
         CurrentHealth-=Damage;
         CurrentHealth=Mathf.Clamp(CurrentHealth,0,MaxHealth);
         damageCounter+=Damage;
-        if(damageCounter >= 250&&!isSpecialAttacking)
+        if(damageCounter >= 300&&!isSpecialAttacking)
         {
-            damageCounter-=250;
+            damageCounter-=300;
             StartCoroutine(SpecialAttack());
         }
         if (CurrentHealth <= 0)
         {
             FillArea.SetActive(false);
+            StopAllCoroutines();
             StartCoroutine(Die());
         }
 

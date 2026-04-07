@@ -5,11 +5,13 @@ public class PlayerShoot : MonoBehaviour
     public Transform firePoint;
     public GameObject bulletPrefab;
     int bulletsFired=0;
+    public bool bullet;
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C)&&bulletsFired<3)
+        if ((Input.GetKeyDown(KeyCode.C)||bullet)&&bulletsFired<3)
         {
             Shoot();
+            bullet=false;
         }
         void Shoot()
         {

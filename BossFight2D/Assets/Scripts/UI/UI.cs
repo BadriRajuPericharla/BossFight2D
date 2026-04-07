@@ -91,10 +91,12 @@ public class UI : MonoBehaviour
     public void Home()
     {
         showMainMenu();
+        
     }
     public void Next()
     {
         EnemyHealth.MaxHealth+=200;
+        PlayerPrefs.SetFloat("EnemyMaxHealth",EnemyHealth.MaxHealth);
         PlayerPrefs.Save();
         SkipMenu=true;
         SceneManager.LoadScene(0);

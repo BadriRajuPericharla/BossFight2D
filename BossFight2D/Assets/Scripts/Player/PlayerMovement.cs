@@ -11,10 +11,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]int JumpCount=0;
     [SerializeField]private GameObject FirePoint;
     [SerializeField]private GameObject HitPoint;
-    
+    [SerializeField]private Animator animator;
     Rigidbody2D Rb;
     SpriteRenderer Sr;
-    [SerializeField]private Animator animator;
+    public float MoveInput;
+    public bool jumpPressed;
+    public bool knifeAttack;
    
     
     void Start()
@@ -28,14 +30,19 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         
-       float MoveInput=Input.GetAxis("Horizontal");
+       float keyboardInput = Input.GetAxis("Horizontal");
+        if (keyboardInput != 0)
+        {
+            MoveInput = keyboardInput;
+        }
        Rb.velocity=new Vector2(MoveInput*Speed,Rb.velocity.y);
-        if (Input.GetKeyDown(KeyCode.UpArrow)&& JumpCount<2)
+        if ((Input.GetKeyDown(KeyCode.UpArrow)||jumpPressed)&& JumpCount<2)
         {
             Rb.velocity=new Vector2(Rb.velocity.x,JumpForce);
            
             animator.SetBool("IsJump",true);
             JumpCount+=1;
+            jumpPressed=false;
         }
         if (MoveInput!=0)
         {
@@ -47,10 +54,19 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
+            knifeAttack=true;
+        }
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            knifeAttack=false;
+        }
+
+        if (knifeAttack)
+        {
             animator.SetBool("IsAttack",true);
             HitPoint.SetActive(true);
         }
-        if (Input.GetKeyUp(KeyCode.E))
+        if(!knifeAttack)
         {
             animator.SetBool("IsAttack",false);
             HitPoint.SetActive(false);
@@ -75,6 +91,30 @@ public class PlayerMovement : MonoBehaviour
             JumpCount=0;
             animator.SetBool("IsJump",false);  
         }
+    }
+    public void leftmove()
+    {
+        MoveInput=-1;
+    }
+    public void rightmove()
+    {
+        MoveInput=1;
+    }
+    public void stopmove()
+    {
+        MoveInput=0;
+    }
+    public void jump()
+    {
+        jumpPressed=true;
+    }
+    public void attckKnife()
+    {
+        knifeAttack=true;
+    }
+    public void stopKnife()
+    {
+        knifeAttack=false;
     }
 
 }
