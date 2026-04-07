@@ -1,9 +1,11 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 public class PlayerShoot : MonoBehaviour
 {
     public Transform firePoint;
     public GameObject bulletPrefab;
+    public Image image;
     int bulletsFired=0;
     public bool bullet;
     void Update()
@@ -19,13 +21,28 @@ public class PlayerShoot : MonoBehaviour
             bulletsFired++;
             if (bulletsFired == 3)
             {
+                
                 StartCoroutine(Reset());
             }
         }
     }
     IEnumerator Reset()
     {
-        yield return new WaitForSeconds(5f);
-        bulletsFired=0;
+        image.enabled=true;
+        float cooldown = 5f;
+        float time = 0;
+
+        image.fillAmount = 0;
+
+        while (time < cooldown)
+        {
+            time += Time.deltaTime;
+            image.fillAmount = time / cooldown;
+            yield return null;
+        }
+
+        image.fillAmount = 1;
+        image.enabled=false;
+        bulletsFired = 0;
     }
 }
