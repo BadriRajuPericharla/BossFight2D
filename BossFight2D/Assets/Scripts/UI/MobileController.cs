@@ -22,7 +22,7 @@ public class MobileController : MonoBehaviour
     }
     public void jump()
     {
-        playerMovement.jumpPressed=true;
+        playerMovement.JumpFromMobile();
     }
     public void attckKnife()
     {

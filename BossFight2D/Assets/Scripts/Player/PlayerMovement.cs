@@ -15,11 +15,10 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D Rb;
     SpriteRenderer Sr;
     public float MoveInput;
-    public bool jumpPressed;
     public bool knifeAttack;
    
     
-    void Start()
+    void Awake()
     {
         Rb=GetComponent<Rigidbody2D>();
         Sr=GetComponent<SpriteRenderer>();
@@ -35,14 +34,13 @@ public class PlayerMovement : MonoBehaviour
         {
             MoveInput = keyboardInput;
         }
-       Rb.velocity=new Vector2(MoveInput*Speed,Rb.velocity.y);
-        if ((Input.GetKeyDown(KeyCode.UpArrow)||jumpPressed)&& JumpCount<2)
+        Rb.velocity=new Vector2(MoveInput*Speed,Rb.velocity.y);
+        if (Input.GetKeyDown(KeyCode.UpArrow) && JumpCount<2)
         {
             Rb.velocity=new Vector2(Rb.velocity.x,JumpForce);
-           
             animator.SetBool("IsJump",true);
             JumpCount+=1;
-            jumpPressed=false;
+            
         }
         if (MoveInput!=0)
         {
@@ -86,35 +84,20 @@ public class PlayerMovement : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Ground" && Rb.velocity.y<=0)
         {
             JumpCount=0;
             animator.SetBool("IsJump",false);  
         }
     }
-    public void leftmove()
+    public void JumpFromMobile()
     {
-        MoveInput=-1;
-    }
-    public void rightmove()
-    {
-        MoveInput=1;
-    }
-    public void stopmove()
-    {
-        MoveInput=0;
-    }
-    public void jump()
-    {
-        jumpPressed=true;
-    }
-    public void attckKnife()
-    {
-        knifeAttack=true;
-    }
-    public void stopKnife()
-    {
-        knifeAttack=false;
+        if (JumpCount < 2)
+        {
+            Rb.velocity = new Vector2(Rb.velocity.x, JumpForce);
+            animator.SetBool("IsJump", true);
+            JumpCount++;
+        }
     }
 
 }

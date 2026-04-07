@@ -2179,7 +2179,6 @@ MonoBehaviour:
   HitPoint: {fileID: 1502384153}
   animator: {fileID: 583317589}
   MoveInput: 0
-  jumpPressed: 0
   knifeAttack: 0
 --- !u!114 &583317587
 MonoBehaviour:
@@ -3983,7 +3982,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1343118644
 MonoBehaviour:
   m_ObjectHideFlags: 0
