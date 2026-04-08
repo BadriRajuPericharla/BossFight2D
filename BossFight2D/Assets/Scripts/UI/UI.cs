@@ -13,8 +13,9 @@ public class UI : MonoBehaviour
     [SerializeField]private PlayerShoot bulletScript;
     [SerializeField]private Spikes spikesScript;
     [SerializeField]private GameObject healthBars;
+    [SerializeField]private GameObject MobileControlPanel;
     [SerializeField]GameObject score;
-    [SerializeField]GameObject settingIcon;
+  
    
 
     
@@ -31,8 +32,9 @@ public class UI : MonoBehaviour
         {
             MainMenu.SetActive(false);
             Time.timeScale=1;
-            settingIcon.SetActive(true);
+            
             healthBars.SetActive(true);
+            MobileControlPanel.SetActive(true);
             spikesScript.enabled=true;
             bulletScript.enabled=true;
             SkipMenu=false;
