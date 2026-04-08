@@ -6,12 +6,15 @@ public class PlayerDizzy : MonoBehaviour
 {
     Animator Anim;
     PlayerMovement move;
+    PlayerShoot playerShoot;
     public EnemyController enemyController;
     public Animator EnemyAnimator;
+
     void Start()
     {
         Anim=GetComponent<Animator>();
         move=GetComponent<PlayerMovement>();
+        playerShoot=GetComponent<PlayerShoot>();
     }
     public void StartDizzy()
     {
@@ -21,10 +24,12 @@ public class PlayerDizzy : MonoBehaviour
     {
         Anim.SetBool("IsDizzy",true);
         move.enabled=false;
+        playerShoot.enabled=false;
         enemyController.enabled=true;
         EnemyAnimator.SetBool("SpecialAttack",false);
         yield return new WaitForSeconds(3);
         move.enabled=true;
+        playerShoot.enabled=true;
         Anim.SetBool("IsDizzy",false);
         
         

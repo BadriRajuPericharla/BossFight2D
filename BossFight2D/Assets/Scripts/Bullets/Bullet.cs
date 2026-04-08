@@ -14,6 +14,7 @@ public class Bullet : MonoBehaviour
         rb=GetComponent<Rigidbody2D>();
         rb.velocity=transform.right*Speed;
         enemyDamage=GameObject.FindGameObjectWithTag("HitPoint").GetComponent<EnemyDamage>();
+        
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -21,7 +22,7 @@ public class Bullet : MonoBehaviour
         {
             Destroy(gameObject);
             collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(20);
-            
+            collision.gameObject.GetComponent<EnemyHealth>().damageCounter+=20;
             enemyDamage.slider.value-=20f;
             
 

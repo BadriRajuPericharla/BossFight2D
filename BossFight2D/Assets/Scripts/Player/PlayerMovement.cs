@@ -42,14 +42,7 @@ public class PlayerMovement : MonoBehaviour
             JumpCount+=1;
             
         }
-        if (MoveInput!=0)
-        {
-            animator.SetBool("IsRun", true);
-        }
-        else
-        {
-            animator.SetBool("IsRun", false);
-        }
+        animator.SetBool("IsRun", Mathf.Abs(Rb.velocity.x) > 0.1f);
         if (Input.GetKeyDown(KeyCode.E))
         {
             knifeAttack=true;
