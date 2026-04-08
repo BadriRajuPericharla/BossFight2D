@@ -8,6 +8,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField]private AudioClip SwordClip;
     [SerializeField]private AudioClip FireBallClip;
     [SerializeField]private AudioClip EnemySwordClip;
+    [SerializeField]private AudioClip DizzyClip;
+    [SerializeField]private AudioClip JumpClip;
+    [SerializeField]private AudioClip PlayerDieClip;
+    [SerializeField]private AudioClip SpecialAttackClip;
     AudioSource audioSource;
     void Start()
     {
@@ -18,10 +22,6 @@ public class AudioManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W))
         {
             Win();
-        }
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            SwordAttack();
         }
     }
     public void Win()
@@ -39,5 +39,21 @@ public class AudioManager : MonoBehaviour
     public void EnemySwordAttack()
     {
         audioSource.PlayOneShot(EnemySwordClip);
+    }
+    public void PlayerDizzy()
+    {
+        audioSource.PlayOneShot(DizzyClip);
+    }
+    public void JumpSound()
+    {
+        audioSource.PlayOneShot(JumpClip);
+    }
+    public void PlayerDeadSound()
+    {
+        audioSource.PlayOneShot(PlayerDieClip);
+    }
+    public void SpecialAttackSound()
+    {
+        audioSource.PlayOneShot(SpecialAttackClip);
     }
 }

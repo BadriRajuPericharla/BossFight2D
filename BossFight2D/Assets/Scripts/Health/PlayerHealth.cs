@@ -12,6 +12,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField]private Animator enemyAnimator;
     [SerializeField]private EnemyController enemyController;
     [SerializeField]private PlayerMovement playerMovement;
+    [SerializeField]private AudioManager audioManager;
     PlayerDizzy playerDizzy;
     bool IsDead=false;
 
@@ -38,11 +39,12 @@ public class PlayerHealth : MonoBehaviour
     IEnumerator Die()
     {
         playerMovement.enabled=false;
+        audioManager.PlayerDeadSound();
         playerDizzy.enabled=false;
         enemyController.enabled=false;
         PlayerAnimator.SetBool("IsDie",true);
         enemyAnimator.SetBool("IsWin",true);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         Destroy(gameObject);
         GameOver.SetActive(true);
     }

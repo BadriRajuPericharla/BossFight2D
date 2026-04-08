@@ -9,6 +9,7 @@ public class PlayerDizzy : MonoBehaviour
     PlayerShoot playerShoot;
     public EnemyController enemyController;
     public Animator EnemyAnimator;
+    [SerializeField]private AudioManager audioManager;
 
     void Start()
     {
@@ -20,9 +21,11 @@ public class PlayerDizzy : MonoBehaviour
     {
         StartCoroutine(Dizzy());
     }
+    
     IEnumerator Dizzy()
     {
         Anim.SetBool("IsDizzy",true);
+        audioManager.PlayerDizzy();
         move.enabled=false;
         playerShoot.enabled=false;
         enemyController.enabled=true;
@@ -30,8 +33,6 @@ public class PlayerDizzy : MonoBehaviour
         yield return new WaitForSeconds(3);
         move.enabled=true;
         playerShoot.enabled=true;
-        Anim.SetBool("IsDizzy",false);
-        
-        
+        Anim.SetBool("IsDizzy",false); 
     }
 }

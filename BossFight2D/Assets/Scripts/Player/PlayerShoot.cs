@@ -18,8 +18,8 @@ public class PlayerShoot : MonoBehaviour
         }
         void Shoot()
         {
-            Instantiate(bulletPrefab,firePoint.position,firePoint.rotation);
             audioManager.FireBallAttack();
+            Instantiate(bulletPrefab,firePoint.position,firePoint.rotation);
             bulletsFired++;
             if (bulletsFired == 3)
             {  

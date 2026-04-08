@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -9,10 +10,12 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField]private Animator EnemyAnimator;
     [SerializeField]private Animator PlayerAnimator;
     [SerializeField]private PlayerMovement playerMovement;
+    [SerializeField]private PlayerShoot playerShoot;
     [SerializeField]private EnemyController enemyController;
     [SerializeField]private GameObject LevelComplete;
     [SerializeField]private SpawnParticles spawnParticles;
     [SerializeField]private AudioManager audioManager;
+    [SerializeField]private Slider slider;
     public float CurrentHealth;
     public int damageCounter;
     bool isSpecialAttacking=false;
@@ -20,6 +23,8 @@ public class EnemyHealth : MonoBehaviour
     {
         MaxHealth=PlayerPrefs.GetFloat("EnemyMaxHealth",1000);
         CurrentHealth=MaxHealth;
+        slider.maxValue=CurrentHealth;
+        slider.value=CurrentHealth;
     }
     public void TakeDamage(int Damage)
     {
@@ -41,6 +46,8 @@ public class EnemyHealth : MonoBehaviour
     IEnumerator Die()
     {
         EnemyAnimator.SetBool("IsDie",true);
+        playerMovement.enabled=false;
+        playerShoot.enabled=false;
         PlayerAnimator.SetBool("IsWin",true);
         audioManager.Win();
         playerMovement.enabled=false;
@@ -51,6 +58,7 @@ public class EnemyHealth : MonoBehaviour
     IEnumerator SpecialAttack()
     {
         isSpecialAttacking=true;
+        audioManager.SpecialAttackSound();
         EnemyAnimator.SetBool("IsAttack",false);
         EnemyAnimator.SetBool("SpecialAttack",true);
         spawnParticles.SpawnSpikes();

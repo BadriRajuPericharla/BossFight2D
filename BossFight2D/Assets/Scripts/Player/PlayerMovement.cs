@@ -27,7 +27,6 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Attack()
     {
-        knifeAttack=true;
         audioManager.SwordAttack();
     }
     
@@ -42,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
         Rb.velocity=new Vector2(MoveInput*Speed,Rb.velocity.y);
         if (Input.GetKeyDown(KeyCode.UpArrow) && JumpCount<2)
         {
+            audioManager.JumpSound();
             Rb.velocity=new Vector2(Rb.velocity.x,JumpForce);
             animator.SetBool("IsJump",true);
             JumpCount+=1;
@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.E))
         {
-           Attack();
+           knifeAttack=true;
             
         }
         if (Input.GetKeyUp(KeyCode.E))
