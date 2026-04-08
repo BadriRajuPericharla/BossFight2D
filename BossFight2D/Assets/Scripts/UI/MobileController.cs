@@ -7,6 +7,7 @@ public class MobileController : MonoBehaviour
 {
     [SerializeField]private PlayerMovement playerMovement;
     [SerializeField]private PlayerShoot playerShoot;
+    
    
     public void leftmove()
     {
@@ -26,7 +27,7 @@ public class MobileController : MonoBehaviour
     }
     public void attckKnife()
     {
-        playerMovement.knifeAttack=true;
+        playerMovement.Attack();
     }
     public void stopKnife()
     {

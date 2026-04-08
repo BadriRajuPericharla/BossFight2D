@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private Transform Player;
     [SerializeField]private Animator animator;
     [SerializeField]private float StopDistance=3.8f;
+
     
 
     
@@ -39,7 +40,9 @@ public class EnemyController : MonoBehaviour
         {
             animator.SetBool("IsRun", false);
             animator.SetBool("IsAttack",true);
+            
 
         }
     }
+    
 }

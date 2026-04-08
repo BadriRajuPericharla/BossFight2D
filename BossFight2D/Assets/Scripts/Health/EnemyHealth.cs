@@ -12,6 +12,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField]private EnemyController enemyController;
     [SerializeField]private GameObject LevelComplete;
     [SerializeField]private SpawnParticles spawnParticles;
+    [SerializeField]private AudioManager audioManager;
     public float CurrentHealth;
     public int damageCounter;
     bool isSpecialAttacking=false;
@@ -41,6 +42,7 @@ public class EnemyHealth : MonoBehaviour
     {
         EnemyAnimator.SetBool("IsDie",true);
         PlayerAnimator.SetBool("IsWin",true);
+        audioManager.Win();
         playerMovement.enabled=false;
         LevelComplete.SetActive(true);
         yield return new WaitForSeconds(2f);

@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]private GameObject FirePoint;
     [SerializeField]private GameObject HitPoint;
     [SerializeField]private Animator animator;
+    [SerializeField]private AudioManager audioManager;
     Rigidbody2D Rb;
     SpriteRenderer Sr;
     public float MoveInput;
@@ -24,7 +25,11 @@ public class PlayerMovement : MonoBehaviour
         Sr=GetComponent<SpriteRenderer>();
         // Rb.freezeRotation=true;
     }
-
+    public void Attack()
+    {
+        knifeAttack=true;
+        audioManager.SwordAttack();
+    }
     
     void Update()
     {
@@ -43,9 +48,11 @@ public class PlayerMovement : MonoBehaviour
             
         }
         animator.SetBool("IsRun", Mathf.Abs(Rb.velocity.x) > 0.1f);
+        
         if (Input.GetKeyDown(KeyCode.E))
         {
-            knifeAttack=true;
+           Attack();
+            
         }
         if (Input.GetKeyUp(KeyCode.E))
         {
@@ -55,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
         if (knifeAttack)
         {
             animator.SetBool("IsAttack",true);
+            
             HitPoint.SetActive(true);
         }
         if(!knifeAttack)

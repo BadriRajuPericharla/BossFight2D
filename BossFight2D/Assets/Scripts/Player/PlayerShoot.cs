@@ -5,6 +5,7 @@ public class PlayerShoot : MonoBehaviour
 {
     public Transform firePoint;
     public GameObject bulletPrefab;
+    public AudioManager audioManager;
     public Image image;
     int bulletsFired=0;
     public bool bullet;
@@ -18,10 +19,10 @@ public class PlayerShoot : MonoBehaviour
         void Shoot()
         {
             Instantiate(bulletPrefab,firePoint.position,firePoint.rotation);
+            audioManager.FireBallAttack();
             bulletsFired++;
             if (bulletsFired == 3)
-            {
-                
+            {  
                 StartCoroutine(Reset());
             }
         }
