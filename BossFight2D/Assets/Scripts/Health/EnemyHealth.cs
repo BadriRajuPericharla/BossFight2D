@@ -41,7 +41,6 @@ public class EnemyHealth : MonoBehaviour
         {
             FillArea.SetActive(false);
             StopAllCoroutines();
-            
             StartCoroutine(Die());
         }
 
