@@ -12,6 +12,8 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField]private PlayerMovement playerMovement;
     [SerializeField]private PlayerShoot playerShoot;
     [SerializeField]private EnemyController enemyController;
+    [SerializeField]private PlayerHealth playerHealth;
+    [SerializeField]private PlayerDamage playerDamage;
     [SerializeField]private GameObject LevelComplete;
     [SerializeField]private SpawnParticles spawnParticles;
     [SerializeField]private AudioManager audioManager;
@@ -39,12 +41,15 @@ public class EnemyHealth : MonoBehaviour
         {
             FillArea.SetActive(false);
             StopAllCoroutines();
+            
             StartCoroutine(Die());
         }
 
     }
     IEnumerator Die()
     {
+        playerHealth.enabled=false;
+        playerDamage.enabled=false;
         EnemyAnimator.SetBool("IsDie",true);
         playerMovement.enabled=false;
         playerShoot.enabled=false;

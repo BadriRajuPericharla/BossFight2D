@@ -27,7 +27,7 @@ public class MobileController : MonoBehaviour
     }
     public void attckKnife()
     {
-        playerMovement.Attack();
+        playerMovement.knifeAttack=true;
     }
     public void stopKnife()
     {
