@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField]private EnemyController enemyController;
     [SerializeField]private PlayerMovement playerMovement;
     [SerializeField]private AudioManager audioManager;
+    [SerializeField]private Slider slider;
     PlayerDizzy playerDizzy;
     bool IsDead=false;
 
@@ -27,6 +29,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if(IsDead) return;
         CurrentHealth-=Damage;
+        slider.value=CurrentHealth;
         CurrentHealth=Mathf.Clamp(CurrentHealth,0,MaxHealth);
         Debug.Log("Damage");
         if (CurrentHealth <= 0)

@@ -23,7 +23,6 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
             collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(20);
             collision.gameObject.GetComponent<EnemyHealth>().damageCounter+=20;
-            enemyDamage.slider.value-=20f;
             
 
         }

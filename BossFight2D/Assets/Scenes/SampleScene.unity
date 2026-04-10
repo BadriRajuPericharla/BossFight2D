@@ -2075,7 +2075,6 @@ MonoBehaviour:
   JumpForce: 20
   JumpCount: 0
   FirePoint: {fileID: 139498036}
-  HitPoint: {fileID: 1502384153}
   animator: {fileID: 583317589}
   audioManager: {fileID: 1105999429}
   MoveInput: 0
@@ -2101,6 +2100,7 @@ MonoBehaviour:
   enemyController: {fileID: 1343118644}
   playerMovement: {fileID: 583317586}
   audioManager: {fileID: 1105999429}
+  slider: {fileID: 1830666902}
 --- !u!95 &583317589
 Animator:
   serializedVersion: 5
@@ -5089,7 +5089,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHealth: {fileID: 1343118648}
   Player: {fileID: 0}
-  slider: {fileID: 1951728602}
 --- !u!1 &1503761788
 GameObject:
   m_ObjectHideFlags: 0
@@ -6961,7 +6960,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHealth: {fileID: 0}
   Player: {fileID: 0}
-  slider: {fileID: 1951728602}
 --- !u!4 &1885293506
 Transform:
   m_ObjectHideFlags: 0

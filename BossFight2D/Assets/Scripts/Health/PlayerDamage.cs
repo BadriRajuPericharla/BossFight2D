@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerDamage : MonoBehaviour
 {
-    public Slider slider;
+
     [SerializeField]private PlayerHealth playerHealth;
     [SerializeField]private SpriteRenderer playerSpriteRenderer;
     
@@ -14,7 +14,7 @@ public class PlayerDamage : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             playerHealth.TakeDamage(10);
-            slider.value-=10f;
+        
             playerSpriteRenderer.color=Color.red;
         }
     }

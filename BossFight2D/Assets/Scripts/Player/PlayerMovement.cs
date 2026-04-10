@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]float JumpForce=8f;
     [SerializeField]int JumpCount=0;
     [SerializeField]private GameObject FirePoint;
-    [SerializeField]private GameObject HitPoint;
     [SerializeField]private Animator animator;
     [SerializeField]private AudioManager audioManager;
     Rigidbody2D Rb;
@@ -62,14 +61,12 @@ public class PlayerMovement : MonoBehaviour
         if (knifeAttack)
         {
             animator.SetBool("IsAttack",true);
-            
-            HitPoint.SetActive(true);
         }
-        if(!knifeAttack)
+        if (!knifeAttack)
         {
             animator.SetBool("IsAttack",false);
-            HitPoint.SetActive(false);
         }
+        
 
         if (MoveInput > 0)
         {
