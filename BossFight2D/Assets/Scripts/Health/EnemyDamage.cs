@@ -18,8 +18,6 @@ public class EnemyDamage : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             enemyHealth.TakeDamage(40);
-            
-           
         }
     }
     
