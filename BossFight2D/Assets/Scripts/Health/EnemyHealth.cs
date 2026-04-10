@@ -31,8 +31,9 @@ public class EnemyHealth : MonoBehaviour
     public void TakeDamage(int Damage)
     {
         CurrentHealth-=Damage;
-        slider.value=CurrentHealth;
+       
         CurrentHealth=Mathf.Clamp(CurrentHealth,0,MaxHealth);
+         slider.value=CurrentHealth;
         if(damageCounter >= 200&&!isSpecialAttacking)
         {
             damageCounter-=200;

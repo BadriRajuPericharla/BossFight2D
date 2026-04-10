@@ -29,8 +29,9 @@ public class PlayerHealth : MonoBehaviour
     {
         if(IsDead) return;
         CurrentHealth-=Damage;
-        slider.value=CurrentHealth;
+        
         CurrentHealth=Mathf.Clamp(CurrentHealth,0,MaxHealth);
+        slider.value=CurrentHealth;
         Debug.Log("Damage");
         if (CurrentHealth <= 0)
         {
