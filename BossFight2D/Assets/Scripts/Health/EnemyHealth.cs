@@ -58,7 +58,7 @@ public class EnemyHealth : MonoBehaviour
         audioManager.Win();
         playerMovement.enabled=false;
         uI.ShowLevelComplete();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         gameObject.SetActive(false);
     }
     IEnumerator SpecialAttack()

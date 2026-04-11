@@ -46,7 +46,15 @@ public class PlayerMovement : MonoBehaviour
             JumpCount+=1;
             
         }
-        animator.SetBool("IsRun", Mathf.Abs(Rb.velocity.x) > 0.1f);
+        if (Mathf.Abs(MoveInput) > 0.1f)
+        {
+            animator.SetBool("IsRun", true);
+        }
+        else
+        {
+            animator.SetBool("IsRun", false);
+        }
+        
         
         if (Input.GetKeyDown(KeyCode.E))
         {
