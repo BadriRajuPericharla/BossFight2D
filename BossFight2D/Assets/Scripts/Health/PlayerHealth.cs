@@ -8,12 +8,12 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] float MaxHealth=200f;
     public float CurrentHealth;
     [SerializeField]private GameObject FillArea;
-    [SerializeField]private GameObject GameOver;
     [SerializeField]private Animator PlayerAnimator;
     [SerializeField]private Animator enemyAnimator;
     [SerializeField]private EnemyController enemyController;
     [SerializeField]private PlayerMovement playerMovement;
     [SerializeField]private AudioManager audioManager;
+    [SerializeField]private UI uI;
     [SerializeField]private Slider slider;
     PlayerDizzy playerDizzy;
     bool IsDead=false;
@@ -50,7 +50,7 @@ public class PlayerHealth : MonoBehaviour
         enemyAnimator.SetBool("IsWin",true);
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
-        GameOver.SetActive(true);
+        uI.ShowGameOver();
     }
     void OnTriggerEnter2D(Collider2D collision)
     {

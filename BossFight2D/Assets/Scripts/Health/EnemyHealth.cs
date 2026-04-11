@@ -14,7 +14,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField]private EnemyController enemyController;
     [SerializeField]private PlayerHealth playerHealth;
     [SerializeField]private PlayerDamage playerDamage;
-    [SerializeField]private GameObject LevelComplete;
+    [SerializeField]private UI uI;
     [SerializeField]private SpawnParticles spawnParticles;
     [SerializeField]private AudioManager audioManager;
     [SerializeField]private Slider slider;
@@ -57,7 +57,7 @@ public class EnemyHealth : MonoBehaviour
         PlayerAnimator.SetBool("IsWin",true);
         audioManager.Win();
         playerMovement.enabled=false;
-        LevelComplete.SetActive(true);
+        uI.ShowLevelComplete();
         yield return new WaitForSeconds(2f);
         gameObject.SetActive(false);
     }

@@ -6,6 +6,7 @@ public class UI : MonoBehaviour
 {
     [SerializeField]GameObject MainMenu;
     [SerializeField]GameObject GameOver;
+    [SerializeField]private GameObject levelComplete;
     [SerializeField]GameObject Settings;
     [SerializeField]MonoBehaviour movement;
     [SerializeField]PlayerMovement playerMovement;
@@ -87,6 +88,7 @@ public class UI : MonoBehaviour
         }
         
         GameOver.SetActive(false);
+        MobileControlPanel.SetActive(false);
         Settings.SetActive(true);
         Time.timeScale=0f;
     }
@@ -110,10 +112,19 @@ public class UI : MonoBehaviour
     public void Resume()
     {
         Settings.SetActive(false);
+        MobileControlPanel.SetActive(true);
         Time.timeScale=1f;
         
     }
-    
-
+    public void ShowGameOver()
+    {
+        GameOver.SetActive(true);
+        MobileControlPanel.SetActive(false);
+    }    
+    public void ShowLevelComplete()
+    {
+        levelComplete.SetActive(true);
+        MobileControlPanel.SetActive(false);
+    }
 
 }
