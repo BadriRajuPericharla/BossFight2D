@@ -15,6 +15,8 @@ public class UI : MonoBehaviour
     [SerializeField]private Spikes spikesScript;
     [SerializeField]private GameObject healthBars;
     [SerializeField]private GameObject MobileControlPanel;
+    [SerializeField]private GameObject KeyboardContorlsPanel;
+    [SerializeField]private GameObject ControlsButton;
     [SerializeField]GameObject score;
   
    
@@ -26,8 +28,7 @@ public class UI : MonoBehaviour
     
     
     void Start()
-    {
-        
+    {  
         
         if (SkipMenu && MainMenu!=null)
         {
@@ -35,7 +36,16 @@ public class UI : MonoBehaviour
             Time.timeScale=1;
             
             healthBars.SetActive(true);
-            MobileControlPanel.SetActive(true);
+            if (Application.isMobilePlatform)
+            {
+                MobileControlPanel.SetActive(true);
+                ControlsButton.SetActive(false);
+            }
+            else
+            {
+                MobileControlPanel.SetActive(false);
+                ControlsButton.SetActive(true);
+            }
             spikesScript.enabled=true;
             bulletScript.enabled=true;
             SkipMenu=false;
@@ -112,7 +122,11 @@ public class UI : MonoBehaviour
     public void Resume()
     {
         Settings.SetActive(false);
-        MobileControlPanel.SetActive(true);
+        if (Application.isMobilePlatform)
+        {
+            MobileControlPanel.SetActive(true);
+        }
+        KeyboardContorlsPanel.SetActive(false);
         Time.timeScale=1f;
         
     }
@@ -126,5 +140,9 @@ public class UI : MonoBehaviour
         levelComplete.SetActive(true);
         MobileControlPanel.SetActive(false);
     }
-
+    public void ShowControls()
+    {
+        KeyboardContorlsPanel.SetActive(true);
+        Time.timeScale=0f;
+    }
 }

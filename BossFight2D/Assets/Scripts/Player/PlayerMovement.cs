@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
             MoveInput = keyboardInput;
         }
         Rb.velocity=new Vector2(MoveInput*Speed,Rb.velocity.y);
-        if (Input.GetKeyDown(KeyCode.UpArrow) && JumpCount<2)
+        if ((Input.GetKeyDown(KeyCode.UpArrow)||Input.GetKeyDown(KeyCode.Space)) && JumpCount<2)
         {
             audioManager.JumpSound();
             Rb.velocity=new Vector2(Rb.velocity.x,JumpForce);
