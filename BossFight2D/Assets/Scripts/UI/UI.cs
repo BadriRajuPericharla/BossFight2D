@@ -4,20 +4,20 @@ using UnityEngine.SceneManagement;
 
 public class UI : MonoBehaviour
 {
-    [SerializeField]GameObject MainMenu;
-    [SerializeField]GameObject GameOver;
+    [SerializeField]private GameObject MainMenu;
+    [SerializeField]private GameObject GameOver;
     [SerializeField]private GameObject levelComplete;
-    [SerializeField]GameObject Settings;
-    [SerializeField]MonoBehaviour movement;
-    [SerializeField]PlayerMovement playerMovement;
-    [SerializeField]EnemyController enemyController;
+    [SerializeField]private GameObject Settings;
+    [SerializeField]private MonoBehaviour movement;
+    [SerializeField]private PlayerMovement playerMovement;
+    [SerializeField]private EnemyController enemyController;
     [SerializeField]private PlayerShoot bulletScript;
     [SerializeField]private Spikes spikesScript;
     [SerializeField]private GameObject healthBars;
     [SerializeField]private GameObject MobileControlPanel;
     [SerializeField]private GameObject KeyboardContorlsPanel;
     [SerializeField]private GameObject ControlsButton;
-    [SerializeField]GameObject score;
+    [SerializeField]private GameObject score;
   
    
 
