@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Rb=GetComponent<Rigidbody2D>();
         Sr=GetComponent<SpriteRenderer>();
-        // Rb.freezeRotation=true;
+       
     }
     public void Attack()
     {
