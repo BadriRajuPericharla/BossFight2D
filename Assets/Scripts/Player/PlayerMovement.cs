@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]private GameObject FirePoint;
     [SerializeField]private Animator animator;
     [SerializeField]private AudioManager audioManager;
+    public bool canAttack=false;
     Rigidbody2D Rb;
     SpriteRenderer Sr;
     public float MoveInput;
@@ -54,17 +55,20 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("IsRun", false);
         }
-        
-        
-        if (Input.GetKeyDown(KeyCode.E))
+
+        if (canAttack)
         {
-           knifeAttack=true;
-            
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                knifeAttack=true;
+                
+            }
+            if (Input.GetKeyUp(KeyCode.E))
+            {
+                knifeAttack=false;
+            }
         }
-        if (Input.GetKeyUp(KeyCode.E))
-        {
-            knifeAttack=false;
-        }
+        
 
         if (knifeAttack)
         {

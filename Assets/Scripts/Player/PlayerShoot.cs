@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class PlayerShoot : MonoBehaviour
 {
+    [SerializeField]private PlayerMovement playerMovement;
     public Transform firePoint;
     public GameObject bulletPrefab;
     public AudioManager audioManager;
@@ -11,21 +12,27 @@ public class PlayerShoot : MonoBehaviour
     public bool bullet;
     void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.C)||bullet)&&bulletsFired<3)
+        if (playerMovement.canAttack)
         {
-            Shoot();
-            bullet=false;
-        }
-        void Shoot()
-        {
-            audioManager.FireBallAttack();
-            Instantiate(bulletPrefab,firePoint.position,firePoint.rotation);
-            bulletsFired++;
-            if (bulletsFired == 3)
-            {  
-                StartCoroutine(Reset());
+            if ((Input.GetKeyDown(KeyCode.C)||bullet)&&bulletsFired<3)
+            {
+                Shoot();
+                bullet=false;
+            }
+            void Shoot()
+            {
+                audioManager.FireBallAttack();
+                Instantiate(bulletPrefab,firePoint.position,firePoint.rotation);
+                bulletsFired++;
+                if (bulletsFired == 3)
+                {  
+                    StartCoroutine(Reset());
+                }
             }
         }
+        else
+            return;
+        
     }
     IEnumerator Reset()
     {

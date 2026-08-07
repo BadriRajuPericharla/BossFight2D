@@ -1,4 +1,5 @@
 
+using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,7 +17,7 @@ public class UI : MonoBehaviour
     [SerializeField]private GameObject healthBars;
     [SerializeField]private GameObject MobileControlPanel;
     [SerializeField]private GameObject KeyboardContorlsPanel;
-    [SerializeField]private GameObject ControlsButton;
+    [SerializeField]private GameObject modesPanel;
     [SerializeField]private GameObject score;
   
    
@@ -39,12 +40,10 @@ public class UI : MonoBehaviour
             if (Application.isMobilePlatform)
             {
                 MobileControlPanel.SetActive(true);
-                ControlsButton.SetActive(false);
             }
             else
             {
                 MobileControlPanel.SetActive(false);
-                ControlsButton.SetActive(true);
             }
             spikesScript.enabled=true;
             bulletScript.enabled=true;
@@ -64,13 +63,31 @@ public class UI : MonoBehaviour
             }
             
         }
+        Modes.modes currentMode=(Modes.modes)PlayerPrefs.GetInt("GameMode",0);
+        switch (currentMode)
+        {
+            case Modes.modes.survival:
+
+                playerMovement.canAttack=false;
+                Modes.instance.StartCoroutine(Modes.instance.Timer());
+
+            break;
+
+            case Modes.modes.elimination:
+            
+                playerMovement.canAttack=true;
+
+            break;
+
+            case Modes.modes.challenge:
+
+                playerMovement.canAttack=true;
+
+            break;
+        }
     }
 
     
-    void Update()
-    {
-        
-    }
     public void showMainMenu()
     {
         SceneManager.LoadScene(0);
@@ -78,7 +95,9 @@ public class UI : MonoBehaviour
     public void Play()
     {
         SkipMenu=true;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        MainMenu.SetActive(false);
+        modesPanel.SetActive(true);
+        
        
     }
     public void Quit()
