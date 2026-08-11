@@ -21,15 +21,16 @@ public class Modes : MonoBehaviour
     }
     public enum modes
     {
+        def,
         survival,
         elimination,
         challenge
     }
     [SerializeField]private PlayerMovement playerMovement;
-    [SerializeField]private TextMeshProUGUI timerText;
+    public TextMeshProUGUI timerText;
     [SerializeField]private UI uI;
     private float currentTime;
-    private float duration=100f;
+    public float duration=100f;
     private modes currentMode;
     
     public void SurvivalMode()
@@ -45,8 +46,6 @@ public class Modes : MonoBehaviour
         PlayerPrefs.SetInt("GameMode",(int)currentMode);
         PlayerPrefs.Save();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        playerMovement.canAttack=true;
-
     }
     public void ChallengeMode()
     {
@@ -54,7 +53,6 @@ public class Modes : MonoBehaviour
         PlayerPrefs.SetInt("GameMode",(int)currentMode);
         PlayerPrefs.Save();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        playerMovement.canAttack=true;
 
     }
     public IEnumerator Timer()

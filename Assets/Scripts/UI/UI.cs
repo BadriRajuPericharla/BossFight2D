@@ -30,7 +30,7 @@ public class UI : MonoBehaviour
     
     void Start()
     {  
-        
+        Time.timeScale=0f;
         if (SkipMenu && MainMenu!=null)
         {
             MainMenu.SetActive(false);

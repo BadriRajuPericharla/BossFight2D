@@ -16,25 +16,25 @@ public class ModesManager : MonoBehaviour
         switch (currentMode)
         {
             case Modes.modes.survival:
-
+                Time.timeScale=1f;
                 playerMovement.canAttack=false;
                 enemyController.Speed*=2f;
+                Modes.instance.timerText.enabled=true;
                 Modes.instance.StartCoroutine(Modes.instance.Timer());
                 StartCoroutine(ParticleSpawner());
-
             break;
-
-            case Modes.modes.elimination:
-                    
-                playerMovement.canAttack=true;
-
-            break;
-
             case Modes.modes.challenge:
-
+                Time.timeScale=1f;
                 playerMovement.canAttack=true;
-
+                Modes.instance.duration=300f;
+                Modes.instance.timerText.enabled=true;
+                Modes.instance.StartCoroutine(Modes.instance.Timer());
             break;
+            case Modes.modes.elimination:
+                Time.timeScale=1f;
+                playerMovement.canAttack=true;
+            break;
+
         }
     }
     
