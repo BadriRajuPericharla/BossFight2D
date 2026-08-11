@@ -63,28 +63,7 @@ public class UI : MonoBehaviour
             }
             
         }
-        Modes.modes currentMode=(Modes.modes)PlayerPrefs.GetInt("GameMode",0);
-        switch (currentMode)
-        {
-            case Modes.modes.survival:
-
-                playerMovement.canAttack=false;
-                Modes.instance.StartCoroutine(Modes.instance.Timer());
-
-            break;
-
-            case Modes.modes.elimination:
-            
-                playerMovement.canAttack=true;
-
-            break;
-
-            case Modes.modes.challenge:
-
-                playerMovement.canAttack=true;
-
-            break;
-        }
+        
     }
 
     

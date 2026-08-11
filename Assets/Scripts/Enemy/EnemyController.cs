@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] private float Speed = 4f;
+    public float Speed = 4f;
     [SerializeField] private Transform Player;
     [SerializeField]private Animator animator;
     [SerializeField]private float StopDistance=3.8f;

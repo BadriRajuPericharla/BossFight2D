@@ -27,8 +27,9 @@ public class Modes : MonoBehaviour
     }
     [SerializeField]private PlayerMovement playerMovement;
     [SerializeField]private TextMeshProUGUI timerText;
+    [SerializeField]private UI uI;
     private float currentTime;
-    private float duration=300f;
+    private float duration=100f;
     private modes currentMode;
     
     public void SurvivalMode()
@@ -37,9 +38,6 @@ public class Modes : MonoBehaviour
         PlayerPrefs.SetInt("GameMode",(int)currentMode);
         PlayerPrefs.Save();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        
-        
-
     }
     public void EliminationMode()
     {
@@ -74,7 +72,7 @@ public class Modes : MonoBehaviour
 
             yield return null;
         }
-
+        uI.ShowLevelComplete();
         timerText.text = "00:00";
     }
 

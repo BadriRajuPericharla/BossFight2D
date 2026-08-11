@@ -9,6 +9,7 @@ public class SpawnParticles : MonoBehaviour
    [SerializeField]private GameObject PaticlePrefab;
    [SerializeField]private int poolSize=20;
    private List<GameObject>Pool=new List<GameObject>();
+
     void Start()
     {
         for (int i = 0; i < poolSize; i++)

@@ -61,7 +61,7 @@ public class EnemyHealth : MonoBehaviour
         yield return new WaitForSeconds(1f);
         gameObject.SetActive(false);
     }
-    IEnumerator SpecialAttack()
+    public IEnumerator SpecialAttack()
     {
         isSpecialAttacking=true;
         audioManager.SpecialAttackSound();
