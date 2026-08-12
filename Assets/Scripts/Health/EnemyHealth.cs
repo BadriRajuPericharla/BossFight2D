@@ -17,6 +17,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField]private UI uI;
     [SerializeField]private SpawnParticles spawnParticles;
     [SerializeField]private AudioManager audioManager;
+    [SerializeField]private ParticleSystem bulletHitEffect;
     [SerializeField]private Slider slider;
     public float CurrentHealth;
     public int damageCounter;
@@ -46,6 +47,11 @@ public class EnemyHealth : MonoBehaviour
             StartCoroutine(Die());
         }
 
+    }
+    public void HitEffect()
+    {
+        bulletHitEffect.gameObject.SetActive(true);
+        bulletHitEffect.Play();
     }
     IEnumerator Die()
     {

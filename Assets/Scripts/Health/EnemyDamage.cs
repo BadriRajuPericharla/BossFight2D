@@ -6,14 +6,7 @@ using UnityEngine.UI;
 public class EnemyDamage : MonoBehaviour
 {
     [SerializeField]private EnemyHealth enemyHealth;
-    [SerializeField]private ParticleSystem bulletHitEffect;
-    [SerializeField]private GameObject Player;
     
-   
-    void Start()
-    {
-        
-    }
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
@@ -21,11 +14,7 @@ public class EnemyDamage : MonoBehaviour
             enemyHealth.TakeDamage(40);
         }
     }
-    public void HitEffect()
-    {
-        bulletHitEffect.gameObject.SetActive(true);
-        bulletHitEffect.Play();
-    }
+    
     
     
 }

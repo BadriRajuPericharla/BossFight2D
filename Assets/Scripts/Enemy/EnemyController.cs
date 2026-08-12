@@ -40,8 +40,6 @@ public class EnemyController : MonoBehaviour
         {
             animator.SetBool("IsRun", false);
             animator.SetBool("IsAttack",true);
-            
-
         }
     }
     

@@ -19,6 +19,7 @@ public class UI : MonoBehaviour
     [SerializeField]private GameObject KeyboardContorlsPanel;
     [SerializeField]private GameObject modesPanel;
     [SerializeField]private GameObject score;
+    [SerializeField]private ParticleSystem[] introParticleSystem;
   
    
 
@@ -35,7 +36,10 @@ public class UI : MonoBehaviour
         {
             MainMenu.SetActive(false);
             Time.timeScale=1;
-            
+            foreach(ParticleSystem particleSystem in introParticleSystem)
+            {
+                particleSystem.gameObject.SetActive(false);
+            }
             healthBars.SetActive(true);
             if (Application.isMobilePlatform)
             {

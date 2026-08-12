@@ -27,6 +27,7 @@ public class Modes : MonoBehaviour
         challenge
     }
     [SerializeField]private PlayerMovement playerMovement;
+   
     public TextMeshProUGUI timerText;
     [SerializeField]private UI uI;
     private float currentTime;
