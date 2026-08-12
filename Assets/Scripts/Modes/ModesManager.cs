@@ -10,7 +10,6 @@ public class ModesManager : MonoBehaviour
     [SerializeField]private EnemyHealth enemyHealth;
     
     
-    
     void Start()
     {
         Modes.modes currentMode=(Modes.modes)PlayerPrefs.GetInt("GameMode",0);
@@ -22,6 +21,7 @@ public class ModesManager : MonoBehaviour
                 enemyController.Speed*=2f;
                 Modes.instance.timerText.enabled=true;
                 Modes.instance.StartCoroutine(Modes.instance.Timer());
+                StartCoroutine(EnemyDamage());
                 StartCoroutine(ParticleSpawner());
             break;
             case Modes.modes.challenge:
@@ -39,6 +39,19 @@ public class ModesManager : MonoBehaviour
         }
     }
     
+    IEnumerator EnemyDamage()
+    {
+        float damagePerSecond = enemyHealth.CurrentHealth / Modes.instance.duration;
+
+        while (enemyHealth.CurrentHealth > 0)
+        {
+            enemyHealth.TakeDamage(damagePerSecond * Time.deltaTime);
+
+            yield return null;
+        }
+    }
+
+
     IEnumerator ParticleSpawner()
     {
         while (true)

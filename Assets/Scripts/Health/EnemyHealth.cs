@@ -29,7 +29,7 @@ public class EnemyHealth : MonoBehaviour
         slider.maxValue=CurrentHealth;
         slider.value=CurrentHealth;
     }
-    public void TakeDamage(int Damage)
+    public void TakeDamage(float Damage)
     {
         CurrentHealth-=Damage;
        
@@ -76,6 +76,7 @@ public class EnemyHealth : MonoBehaviour
         spawnParticles.SpawnSpikes();
         enemyController.enabled=false;
         yield return new WaitForSeconds(3f);
+        spawnParticles.spawnParticleEffect.Stop();
         EnemyAnimator.SetBool("SpecialAttack",false);
         isSpecialAttacking=false;
         enemyController.enabled=true;

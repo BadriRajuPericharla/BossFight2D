@@ -14,7 +14,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]private AudioManager audioManager;
     public bool canAttack=false;
     Rigidbody2D Rb;
-    SpriteRenderer Sr;
     public float MoveInput;
     public bool knifeAttack;
    
@@ -22,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         Rb=GetComponent<Rigidbody2D>();
-        Sr=GetComponent<SpriteRenderer>();
+        
        
     }
     public void Attack()
