@@ -10,22 +10,23 @@ public class PlayerDizzy : MonoBehaviour
     public EnemyController enemyController;
     public Animator EnemyAnimator;
     [SerializeField]private AudioManager audioManager;
-    Rigidbody2D Rb;
+    [SerializeField]private ParticleSystem hitParticleSystem;
+
     void Start()
     {
-        Rb=GetComponent<Rigidbody2D>();
         Anim=GetComponent<Animator>();
         move=GetComponent<PlayerMovement>();
         playerShoot=GetComponent<PlayerShoot>();
     }
     public void StartDizzy()
     {
+        hitParticleSystem.gameObject.SetActive(true);
+        hitParticleSystem.Play();
         StartCoroutine(Dizzy());
     }
     
     IEnumerator Dizzy()
     {
-        Rb.angularVelocity=0;
         Anim.SetBool("IsDizzy",true);
         audioManager.PlayerDizzy();
         move.enabled=false;

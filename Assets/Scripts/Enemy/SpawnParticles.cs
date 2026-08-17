@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnParticles : MonoBehaviour
 {
     [SerializeField]private int ParticleCount=12;
-   [SerializeField]private float Speed=5f;
+   [SerializeField]private float Speed=10f;
    [SerializeField]private GameObject PaticlePrefab;
    [SerializeField]private int poolSize=20;
    private List<GameObject>Pool=new List<GameObject>();
