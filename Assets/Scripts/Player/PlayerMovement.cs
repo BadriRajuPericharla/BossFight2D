@@ -1,13 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.Rendering;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]float Speed=10f;
-    [SerializeField]float JumpForce=8f;
+    [SerializeField]float JumpForce=15f;
+    [SerializeField]private float Gravity=20f;
+    [SerializeField]private float fallGravity=35f;
     [SerializeField]int JumpCount=0;
     [SerializeField]private GameObject FirePoint;
     [SerializeField]private Animator animator;
@@ -15,8 +18,8 @@ public class PlayerMovement : MonoBehaviour
     public bool canAttack=false;
     Rigidbody2D Rb;
     public float MoveInput;
-    public bool knifeAttack;
-   
+    public bool knifeAttack=false;
+    private float verticalVelocity;
     
     void Awake()
     {
@@ -37,24 +40,17 @@ public class PlayerMovement : MonoBehaviour
         {
             MoveInput = keyboardInput;
         }
-        Rb.velocity=new Vector2(MoveInput*Speed,Rb.velocity.y);
         if ((Input.GetKeyDown(KeyCode.UpArrow)||Input.GetKeyDown(KeyCode.Space)) && JumpCount<2)
         {
             audioManager.JumpSound();
-            Rb.velocity=new Vector2(Rb.velocity.x,JumpForce);
-            animator.SetBool("IsJump",true);
-            JumpCount+=1;
+
+            verticalVelocity = JumpForce;
+
+            animator.SetBool("IsJump", true);
+
+            JumpCount++;
             
         }
-        if (Mathf.Abs(MoveInput) > 0.1f)
-        {
-            animator.SetBool("IsRun", true);
-        }
-        else
-        {
-            animator.SetBool("IsRun", false);
-        }
-
         if (canAttack)
         {
             if (Input.GetKeyDown(KeyCode.E))
@@ -91,9 +87,30 @@ public class PlayerMovement : MonoBehaviour
         }
         
     }
+    void FixedUpdate()
+    {
+
+        float horizontalMovement = MoveInput * Speed;
+        if (verticalVelocity > 0)
+        {
+            verticalVelocity -= Gravity * Time.fixedDeltaTime;
+        }
+        else
+        {
+            verticalVelocity-=fallGravity*Time.fixedDeltaTime;
+        }
+
+        Vector2 movement = new Vector2(horizontalMovement,verticalVelocity);
+
+  
+        Rb.MovePosition(Rb.position + movement * Time.fixedDeltaTime);
+
+  
+        animator.SetBool("IsRun", Mathf.Abs(MoveInput) > 0.1f);
+    }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground" && Rb.velocity.y<=0)
+        if (collision.gameObject.tag == "Ground")
         {
             JumpCount=0;
             animator.SetBool("IsJump",false);  
@@ -103,8 +120,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (JumpCount < 2)
         {
-            Rb.velocity = new Vector2(Rb.velocity.x, JumpForce);
+            verticalVelocity = JumpForce;
+
             animator.SetBool("IsJump", true);
+
             JumpCount++;
         }
     }

@@ -76,7 +76,6 @@ public class EnemyHealth : MonoBehaviour
         spawnParticles.SpawnSpikes();
         enemyController.enabled=false;
         yield return new WaitForSeconds(3f);
-        spawnParticles.spawnParticleEffect.Stop();
         EnemyAnimator.SetBool("SpecialAttack",false);
         isSpecialAttacking=false;
         enemyController.enabled=true;

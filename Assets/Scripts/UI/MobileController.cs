@@ -27,7 +27,10 @@ public class MobileController : MonoBehaviour
     }
     public void attckKnife()
     {
-        playerMovement.knifeAttack=true;
+        if (playerMovement.canAttack)
+        {
+            playerMovement.knifeAttack=true;
+        }
     }
     public void stopKnife()
     {

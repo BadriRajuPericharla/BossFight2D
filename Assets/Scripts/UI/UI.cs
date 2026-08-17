@@ -41,14 +41,14 @@ public class UI : MonoBehaviour
                 particleSystem.gameObject.SetActive(false);
             }
             healthBars.SetActive(true);
-            if (Application.isMobilePlatform)
+            if (true)
             {
                 MobileControlPanel.SetActive(true);
             }
-            else
-            {
-                MobileControlPanel.SetActive(false);
-            }
+            // else
+            // {
+            //     MobileControlPanel.SetActive(false);
+            // }
             spikesScript.enabled=true;
             bulletScript.enabled=true;
             SkipMenu=false;
@@ -124,7 +124,7 @@ public class UI : MonoBehaviour
     public void Resume()
     {
         Settings.SetActive(false);
-        if (Application.isMobilePlatform)
+        if (true)
         {
             MobileControlPanel.SetActive(true);
         }

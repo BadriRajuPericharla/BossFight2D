@@ -19,20 +19,21 @@ public class PlayerShoot : MonoBehaviour
                 Shoot();
                 bullet=false;
             }
-            void Shoot()
-            {
-                audioManager.FireBallAttack();
-                Instantiate(bulletPrefab,firePoint.position,firePoint.rotation);
-                bulletsFired++;
-                if (bulletsFired == 3)
-                {  
-                    StartCoroutine(Reset());
-                }
-            }
+            
         }
         else
             return;
         
+    }
+    void Shoot()
+    {
+        audioManager.FireBallAttack();
+        Instantiate(bulletPrefab,firePoint.position,firePoint.rotation);
+        bulletsFired++;
+        if (bulletsFired == 3)
+        {  
+            StartCoroutine(Reset());
+        }
     }
     IEnumerator Reset()
     {

@@ -8,7 +8,6 @@ public class SpawnParticles : MonoBehaviour
    [SerializeField]private float Speed=5f;
    [SerializeField]private GameObject PaticlePrefab;
    [SerializeField]private int poolSize=20;
-   public ParticleSystem spawnParticleEffect;
    private List<GameObject>Pool=new List<GameObject>();
 
     void Start()
@@ -38,8 +37,6 @@ public class SpawnParticles : MonoBehaviour
     {
         float angleStep=360f/ParticleCount;
         float angle=0f;
-        spawnParticleEffect.gameObject.SetActive(true);
-        spawnParticleEffect.Play();
         for(int i = 0; i < ParticleCount; i++)
         {
             float x=Mathf.Cos(angle*Mathf.Deg2Rad);

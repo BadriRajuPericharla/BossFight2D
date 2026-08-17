@@ -7,18 +7,22 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private Transform Player;
     [SerializeField]private Animator animator;
     [SerializeField]private float StopDistance=3.8f;
+    private bool shouldMove;
+    private Vector2 targetPosition;
+    Rigidbody2D Rb;
 
-    
 
-    
-
+    void Start()
+    {
+        Rb=GetComponent<Rigidbody2D>();
+    }
     void Update() 
     {
         if(Player==null)return;
-        Vector2 Position = new Vector2(Player.position.x, transform.position.y);
+        targetPosition = new Vector2(Player.position.x, Rb.position.y);
        
-        float distance = Vector2.Distance(transform.position, Position);
-        Vector2 direction = Player.position - transform.position;
+        float distance = Vector2.Distance(transform.position, targetPosition);
+        Vector2 direction = (Vector2)Player.position - Rb.position;
         if(direction.x > 0)
         {
             transform.localScale = new Vector3(-1,1,1);
@@ -32,15 +36,25 @@ public class EnemyController : MonoBehaviour
 
         if(distance > StopDistance)
         {
-            transform.position = Vector2.MoveTowards(transform.position, Position, Speed * Time.deltaTime);
+            shouldMove=true;
             animator.SetBool("IsRun", true);
             animator.SetBool("IsAttack",false);
         }
         else
         {
+            shouldMove=false;
             animator.SetBool("IsRun", false);
             animator.SetBool("IsAttack",true);
         }
     }
-    
+    void FixedUpdate()
+    {
+        if (!shouldMove)
+            return;
+
+        Vector2 newPosition = Vector2.MoveTowards(Rb.position,targetPosition,Speed * Time.fixedDeltaTime);
+
+        Rb.MovePosition(newPosition);
+    }
+
 }
