@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]private Animator animator;
     [SerializeField]private AudioManager audioManager;
     public bool canAttack=false;
+    public bool isjumping=false;
     Rigidbody2D Rb;
     public float MoveInput;
     public bool knifeAttack=false;
@@ -34,7 +35,6 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()
     {
-        
        float keyboardInput = Input.GetAxis("Horizontal");
         if (keyboardInput != 0)
         {
@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
         if ((Input.GetKeyDown(KeyCode.UpArrow)||Input.GetKeyDown(KeyCode.Space)) && JumpCount<2)
         {
             audioManager.JumpSound();
-
+            isjumping=true;
             verticalVelocity = JumpForce;
 
             animator.SetBool("IsJump", true);
@@ -112,6 +112,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground")
         {
+            isjumping=false;
             JumpCount=0;
             animator.SetBool("IsJump",false);  
         }
@@ -121,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
         if (JumpCount < 2)
         {
             verticalVelocity = JumpForce;
-
+            isjumping=true;
             animator.SetBool("IsJump", true);
 
             JumpCount++;
