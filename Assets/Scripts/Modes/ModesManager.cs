@@ -12,11 +12,11 @@ public class ModesManager : MonoBehaviour
     [SerializeField]private EnemyHealth enemyHealth;
     [SerializeField]private GameObject knifeAttackBtn;
     [SerializeField]private GameObject bulletAttackBtn;
-    public Slider shockWaveSlider;
     [SerializeField]private TextMeshProUGUI timerText;
     [SerializeField]private UI uI;
     private float currentTime;
     public float duration=100f;
+    public Slider shockWaveSlider;
     
     
     void Start()

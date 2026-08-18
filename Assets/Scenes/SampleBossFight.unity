@@ -5946,7 +5946,7 @@ Transform:
   m_GameObject: {fileID: 1295447332}
   serializedVersion: 2
   m_LocalRotation: {x: -4.2134474e-10, y: 0.0000000073947577, z: 6.135539e-16, w: 1}
-  m_LocalPosition: {x: -21.32, y: 2.9, z: 0}
+  m_LocalPosition: {x: -30.79, y: 2.9, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -10775,10 +10775,10 @@ MonoBehaviour:
   enemyHealth: {fileID: 1343118648}
   knifeAttackBtn: {fileID: 940378845}
   bulletAttackBtn: {fileID: 1803511201}
-  shockWaveSlider: {fileID: 1624091051}
   timerText: {fileID: 185731915}
   uI: {fileID: 448046140}
   duration: 60
+  shockWaveSlider: {fileID: 1624091051}
 --- !u!4 &2082430936
 Transform:
   m_ObjectHideFlags: 0
