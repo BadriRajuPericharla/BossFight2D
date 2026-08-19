@@ -8,25 +8,30 @@ using UnityEngine.SceneManagement;
 
 public class UI : MonoBehaviour
 {
+    [Header("UI Panels")]
     [SerializeField]private GameObject MainMenu;
     [SerializeField]private GameObject GameOver;
     [SerializeField]private GameObject levelComplete;
     [SerializeField]private GameObject Settings;
+    [SerializeField]private GameObject MobileControlPanel;
+    [SerializeField]private GameObject KeyboardContorlsPanel;
+    [SerializeField]private GameObject modesPanel;
+    [SerializeField]private GameObject healthBars;
+    [SerializeField]private GameObject pausePanel;
+    [Header("Monobehaviour Scripts")]
     [SerializeField]private MonoBehaviour movement;
     [SerializeField]private PlayerMovement playerMovement;
     [SerializeField]private EnemyController enemyController;
     [SerializeField]private PlayerShoot bulletScript;
-    [SerializeField]private Spikes spikesScript;
-    [SerializeField]private GameObject healthBars;
-    [SerializeField]private GameObject MobileControlPanel;
-    [SerializeField]private GameObject KeyboardContorlsPanel;
-    [SerializeField]private GameObject modesPanel;
+    [SerializeField]private Spikes spikesScript;  
+    [Header("ParticleSystems")]
     [SerializeField]private ParticleSystem[] introParticleSystem;
+    [Header("Text")]
     [SerializeField]private TextMeshProUGUI countDownTxt;
   
    
 
-    
+    static bool ShowModes=false;
     
     static bool SkipMenu=false;
     
@@ -34,41 +39,55 @@ public class UI : MonoBehaviour
     
     void Start()
     {  
-        Time.timeScale=0f;
-        if (SkipMenu && MainMenu!=null)
+        Time.timeScale = 0f;
+
+        if (ShowModes)
+        {
+            ShowModes = false;
+
+            MainMenu.SetActive(false);
+            modesPanel.SetActive(true);
+
+            playerMovement.enabled = false;
+            enemyController.enabled = false;
+            spikesScript.enabled = false;
+            bulletScript.enabled = false;
+            movement.enabled = false;
+
+            return;
+        }
+
+        if (SkipMenu && MainMenu != null)
         {
             MainMenu.SetActive(false);
-            Time.timeScale=1;
-            foreach(ParticleSystem particleSystem in introParticleSystem)
+            Time.timeScale = 1;
+
+            foreach (ParticleSystem particleSystem in introParticleSystem)
             {
                 particleSystem.gameObject.SetActive(false);
             }
+
             healthBars.SetActive(true);
-            if (true)
-            {
-                MobileControlPanel.SetActive(true);
-            }
-            // else
-            // {
-            //     MobileControlPanel.SetActive(false);
-            // }
-            spikesScript.enabled=true;
-            bulletScript.enabled=true;
-            SkipMenu=false;
-            movement.enabled=true;
+            MobileControlPanel.SetActive(true);
+
+            spikesScript.enabled = true;
+            bulletScript.enabled = true;
+
+            SkipMenu = false;
+            movement.enabled = true;
         }
         else
         {
             if (MainMenu != null)
             {
                 MainMenu.SetActive(true);
-                playerMovement.enabled=false;
-                enemyController.enabled=false;
-                spikesScript.enabled=false;
-                bulletScript.enabled=false;
-                movement.enabled=false;
+
+                playerMovement.enabled = false;
+                enemyController.enabled = false;
+                spikesScript.enabled = false;
+                bulletScript.enabled = false;
+                movement.enabled = false;
             }
-            
         }
         
     }
@@ -95,6 +114,11 @@ public class UI : MonoBehaviour
         SkipMenu=true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+    public void ShowPausePanel()
+    {
+        pausePanel.SetActive(true);
+        Time.timeScale=0f;
+    }
     public void ShowSettings()
     {
         if (MainMenu != null)
@@ -114,16 +138,17 @@ public class UI : MonoBehaviour
     }
     public void NewGame()
     {
+        ShowModes=true;
         SkipMenu=true;
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void Replay()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void Resume()
     {
-        Settings.SetActive(false);
+        pausePanel.SetActive(false);
         StartCoroutine(ResumeTimer());
     }
     public void ShowGameOver()
@@ -140,6 +165,16 @@ public class UI : MonoBehaviour
     {
         KeyboardContorlsPanel.SetActive(true);
         Time.timeScale=0f;
+    }
+    public void CloseSettings()
+    {
+        Settings.SetActive(false);
+        if (true)
+        {
+            MobileControlPanel.SetActive(true);
+            KeyboardContorlsPanel.SetActive(false);
+        }
+        Time.timeScale=1f;
     }
     IEnumerator ResumeTimer()
     {
