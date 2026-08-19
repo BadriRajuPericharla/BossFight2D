@@ -61,8 +61,8 @@ public class ModesManager : MonoBehaviour
 
         while (enemyHealth.CurrentHealth > 0)
         {
-            enemyHealth.TakeDamage(damagePerSecond * Time.deltaTime);
-
+            if(Modes.instance.currentMode==Modes.modes.survival)
+                enemyHealth.TakeDamage(damagePerSecond * Time.deltaTime);
             yield return null;
         }
     }
@@ -70,11 +70,13 @@ public class ModesManager : MonoBehaviour
 
     IEnumerator ParticleSpawner()
     {
+        
         shockWaveSlider.value = 0;
         shockWaveSlider.maxValue = 15f;
 
         while (enemyHealth != null && enemyHealth.gameObject.activeInHierarchy)
         {
+            
             shockWaveSlider.value += Time.deltaTime;
 
             if (shockWaveSlider.value >= shockWaveSlider.maxValue)

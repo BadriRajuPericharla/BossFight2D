@@ -32,7 +32,6 @@ public class PlayerHealth : MonoBehaviour
         
         CurrentHealth=Mathf.Clamp(CurrentHealth,0,MaxHealth);
         slider.value=CurrentHealth;
-        Debug.Log("Damage");
         if (CurrentHealth <= 0)
         {
             IsDead=true;

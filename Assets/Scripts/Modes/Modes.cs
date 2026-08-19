@@ -21,13 +21,12 @@ public class Modes : MonoBehaviour
     }
     public enum modes
     {
-        def,
         survival,
         elimination,
         challenge
     }
     
-    private modes currentMode;
+    public modes currentMode;
     
     public void SurvivalMode()
     {

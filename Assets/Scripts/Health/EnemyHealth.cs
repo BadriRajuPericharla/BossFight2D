@@ -25,6 +25,7 @@ public class EnemyHealth : MonoBehaviour
     bool isSpecialAttacking=false;
     void Start()
     {
+        
         MaxHealth=PlayerPrefs.GetFloat("EnemyMaxHealth",1000);
         CurrentHealth=MaxHealth;
         slider.maxValue=CurrentHealth;
@@ -34,7 +35,10 @@ public class EnemyHealth : MonoBehaviour
     public void TakeDamage(float Damage)
     {
         CurrentHealth-=Damage;
-        modesManager.shockWaveSlider.value=damageCounter;
+        if (!(Modes.instance.currentMode==Modes.modes.survival))
+        {
+            modesManager.shockWaveSlider.value=damageCounter;
+        }
         CurrentHealth=Mathf.Clamp(CurrentHealth,0,MaxHealth);
         slider.value=CurrentHealth;
         if(damageCounter >= 200 && !isSpecialAttacking)
@@ -71,7 +75,11 @@ public class EnemyHealth : MonoBehaviour
     }
     public IEnumerator SpecialAttack()
     {
-        modesManager.shockWaveSlider.value=0;
+        if (!(Modes.instance.currentMode==Modes.modes.survival))
+        {
+            modesManager.shockWaveSlider.value=0;
+        }
+        
         isSpecialAttacking=true;
         audioManager.SpecialAttackSound();
         EnemyAnimator.SetBool("IsAttack",false);
