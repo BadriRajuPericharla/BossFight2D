@@ -1,5 +1,8 @@
 
+using System.Collections;
 using System.Threading;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,8 +21,8 @@ public class UI : MonoBehaviour
     [SerializeField]private GameObject MobileControlPanel;
     [SerializeField]private GameObject KeyboardContorlsPanel;
     [SerializeField]private GameObject modesPanel;
-    [SerializeField]private GameObject score;
     [SerializeField]private ParticleSystem[] introParticleSystem;
+    [SerializeField]private TextMeshProUGUI countDownTxt;
   
    
 
@@ -109,11 +112,8 @@ public class UI : MonoBehaviour
         showMainMenu();
         
     }
-    public void Next()
+    public void NewGame()
     {
-        EnemyHealth.MaxHealth+=200;
-        PlayerPrefs.SetFloat("EnemyMaxHealth",EnemyHealth.MaxHealth);
-        PlayerPrefs.Save();
         SkipMenu=true;
         SceneManager.LoadScene(0);
     }
@@ -124,13 +124,7 @@ public class UI : MonoBehaviour
     public void Resume()
     {
         Settings.SetActive(false);
-        if (true)
-        {
-            MobileControlPanel.SetActive(true);
-        }
-        KeyboardContorlsPanel.SetActive(false);
-        Time.timeScale=1f;
-        
+        StartCoroutine(ResumeTimer());
     }
     public void ShowGameOver()
     {
@@ -146,5 +140,24 @@ public class UI : MonoBehaviour
     {
         KeyboardContorlsPanel.SetActive(true);
         Time.timeScale=0f;
+    }
+    IEnumerator ResumeTimer()
+    {
+        Time.timeScale=0f;
+        countDownTxt.gameObject.SetActive(true);
+        countDownTxt.text="3";
+        yield return new WaitForSecondsRealtime(1);
+        countDownTxt.text="2";
+        yield return new WaitForSecondsRealtime(1);
+        countDownTxt.text="1";
+        yield return new WaitForSecondsRealtime(1);
+        countDownTxt.gameObject.SetActive(false);
+        if (true)
+        {
+            MobileControlPanel.SetActive(true);
+            KeyboardContorlsPanel.SetActive(false);
+        }
+        Time.timeScale=1f;
+        
     }
 }
