@@ -43,6 +43,7 @@ public class UI : MonoBehaviour
 
         if (ShowModes)
         {
+            Modes.instance.DefaultMode();
             ShowModes = false;
 
             MainMenu.SetActive(false);
@@ -60,7 +61,7 @@ public class UI : MonoBehaviour
         if (SkipMenu && MainMenu != null)
         {
             MainMenu.SetActive(false);
-            Time.timeScale = 1;
+            Time.timeScale = 1f;
 
             foreach (ParticleSystem particleSystem in introParticleSystem)
             {
@@ -81,7 +82,7 @@ public class UI : MonoBehaviour
             if (MainMenu != null)
             {
                 MainMenu.SetActive(true);
-
+                Modes.instance.DefaultMode();
                 playerMovement.enabled = false;
                 enemyController.enabled = false;
                 spikesScript.enabled = false;

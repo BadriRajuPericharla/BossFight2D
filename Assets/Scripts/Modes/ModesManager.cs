@@ -15,15 +15,20 @@ public class ModesManager : MonoBehaviour
     [SerializeField]private TextMeshProUGUI timerText;
     [SerializeField]private UI uI;
     private float currentTime;
+    private Modes.modes currentMode;
     public float duration=100f;
     public Slider shockWaveSlider;
     
     
     void Start()
     {
-        Modes.modes currentMode=(Modes.modes)PlayerPrefs.GetInt("GameMode",0);
+        currentMode=(Modes.modes)PlayerPrefs.GetInt("GameMode",0);
+        Debug.Log(currentMode);
         switch (currentMode)
         {
+            case Modes.modes.def:
+                return;
+            
             case Modes.modes.survival:
                 Time.timeScale=1f;
                 playerMovement.canAttack=false;
@@ -61,7 +66,7 @@ public class ModesManager : MonoBehaviour
 
         while (enemyHealth.CurrentHealth > 0)
         {
-            if(Modes.instance.currentMode==Modes.modes.survival)
+            if(currentMode==Modes.modes.survival)
                 enemyHealth.TakeDamage(damagePerSecond * Time.deltaTime);
             yield return null;
         }
@@ -70,7 +75,6 @@ public class ModesManager : MonoBehaviour
 
     IEnumerator ParticleSpawner()
     {
-        
         shockWaveSlider.value = 0;
         shockWaveSlider.maxValue = 15f;
 
@@ -78,7 +82,6 @@ public class ModesManager : MonoBehaviour
         {
             
             shockWaveSlider.value += Time.deltaTime;
-
             if (shockWaveSlider.value >= shockWaveSlider.maxValue)
             {
                 shockWaveSlider.value = 0f;

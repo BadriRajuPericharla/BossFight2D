@@ -20,22 +20,24 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField]private ParticleSystem bulletHitEffect;
     [SerializeField]private Slider slider;
     [SerializeField]private ModesManager modesManager;
+    private Modes.modes currentMode;
     public float CurrentHealth;
     public int damageCounter;
     bool isSpecialAttacking=false;
     void Start()
     {
-        
+        currentMode = (Modes.modes)PlayerPrefs.GetInt("GameMode", 0);
         MaxHealth=PlayerPrefs.GetFloat("EnemyMaxHealth",1000);
         CurrentHealth=MaxHealth;
         slider.maxValue=CurrentHealth;
-        modesManager.shockWaveSlider.maxValue=200;
+        if (currentMode!=Modes.modes.survival)
+            modesManager.shockWaveSlider.maxValue=200;
         slider.value=CurrentHealth;
     }
     public void TakeDamage(float Damage)
     {
         CurrentHealth-=Damage;
-        if (!(Modes.instance.currentMode==Modes.modes.survival))
+        if (currentMode!=Modes.modes.survival)
         {
             modesManager.shockWaveSlider.value=damageCounter;
         }
@@ -75,7 +77,7 @@ public class EnemyHealth : MonoBehaviour
     }
     public IEnumerator SpecialAttack()
     {
-        if (!(Modes.instance.currentMode==Modes.modes.survival))
+        if (currentMode!=Modes.modes.survival)
         {
             modesManager.shockWaveSlider.value=0;
         }

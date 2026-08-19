@@ -21,6 +21,7 @@ public class Modes : MonoBehaviour
     }
     public enum modes
     {
+        def,
         survival,
         elimination,
         challenge
@@ -28,6 +29,12 @@ public class Modes : MonoBehaviour
     
     public modes currentMode;
     
+    public void DefaultMode()
+    {
+        currentMode=modes.def;
+        PlayerPrefs.SetInt("GameMode",(int)currentMode);
+        PlayerPrefs.Save();
+    }
     public void SurvivalMode()
     {
         currentMode=modes.survival;
