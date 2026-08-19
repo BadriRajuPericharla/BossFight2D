@@ -23,7 +23,6 @@ public class ModesManager : MonoBehaviour
     void Start()
     {
         currentMode=(Modes.modes)PlayerPrefs.GetInt("GameMode",0);
-        Debug.Log(currentMode);
         switch (currentMode)
         {
             case Modes.modes.def:

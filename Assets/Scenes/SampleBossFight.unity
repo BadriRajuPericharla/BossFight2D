@@ -4207,7 +4207,7 @@ MonoBehaviour:
   JumpCount: 0
   FirePoint: {fileID: 139498036}
   animator: {fileID: 583317589}
-  audioManager: {fileID: 0}
+  audioManager: {fileID: 232129324}
   canAttack: 0
   isjumping: 0
   MoveInput: 0

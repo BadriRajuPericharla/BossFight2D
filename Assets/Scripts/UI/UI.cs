@@ -122,10 +122,10 @@ public class UI : MonoBehaviour
     }
     public void ShowSettings()
     {
-        if (MainMenu != null)
-        {
-            MainMenu.SetActive(false);
-        }
+        // if (MainMenu != null)
+        // {
+        //     MainMenu.SetActive(false);
+        // }
         
         GameOver.SetActive(false);
         MobileControlPanel.SetActive(false);
