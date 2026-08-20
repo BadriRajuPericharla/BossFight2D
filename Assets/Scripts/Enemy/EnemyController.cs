@@ -6,7 +6,7 @@ public class EnemyController : MonoBehaviour
     public float Speed = 4f;
     [SerializeField] private Transform Player;
     [SerializeField]private Animator animator;
-    [SerializeField]private float StopDistance=3.8f;
+    [SerializeField]private float StopDistance=4f;
     private bool shouldMove;
     private Vector2 targetPosition;
     Rigidbody2D Rb;

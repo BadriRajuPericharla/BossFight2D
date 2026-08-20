@@ -38,19 +38,19 @@ public class PlayerShoot : MonoBehaviour
     IEnumerator Reset()
     {
         image.enabled=true;
-        float cooldown = 5f;
-        float time = 0;
+        float cooldown = -5f;
+        float time = cooldown;
 
-        image.fillAmount = 0;
+        image.fillAmount = 1;
 
-        while (time < cooldown)
+        while (time < 0f)
         {
             time += Time.deltaTime;
             image.fillAmount = time / cooldown;
             yield return null;
         }
 
-        image.fillAmount = 1;
+        image.fillAmount = 0;
         image.enabled=false;
         bulletsFired = 0;
     }

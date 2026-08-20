@@ -156,6 +156,7 @@ public class UI : MonoBehaviour
     {
         GameOver.SetActive(true);
         MobileControlPanel.SetActive(false);
+        healthBars.SetActive(false);
     }    
     public void ShowLevelComplete()
     {

@@ -58,7 +58,27 @@ public class ModesManager : MonoBehaviour
 
         }
     }
-    
+    public void PlayerDied()
+    {
+        StopAllCoroutines();
+
+        if (enemyHealth != null)
+        {
+            enemyHealth.StopAllCoroutines();
+        }
+
+        if (timerText != null)
+        {
+            timerText.enabled = false;
+        }
+
+        if (shockWaveSlider != null)
+        {
+            shockWaveSlider.gameObject.SetActive(false);
+        }
+        uI.ShowGameOver();
+    }
+
     IEnumerator EnemyDamage()
     {
         float damagePerSecond = enemyHealth.CurrentHealth / duration;

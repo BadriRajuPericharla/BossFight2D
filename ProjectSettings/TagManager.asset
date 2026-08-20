@@ -9,6 +9,7 @@ TagManager:
   - Health
   - HitPoint
   - End
+  - Shield
   layers:
   - Default
   - TransparentFX

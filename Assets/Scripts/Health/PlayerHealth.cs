@@ -15,7 +15,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField]private AudioManager audioManager;
     [SerializeField]private UI uI;
     [SerializeField]private Slider slider;
-    PlayerDizzy playerDizzy;
+    [SerializeField]private ModesManager modesManager;
+    private PlayerDizzy playerDizzy;
     bool IsDead=false;
 
     void Start()
@@ -28,6 +29,7 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int Damage)
     {
         if(IsDead) return;
+        if(PlayerShield.instance.shieldActivated) return;
         CurrentHealth-=Damage;
         
         CurrentHealth=Mathf.Clamp(CurrentHealth,0,MaxHealth);
@@ -49,7 +51,7 @@ public class PlayerHealth : MonoBehaviour
         enemyAnimator.SetBool("IsWin",true);
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
-        uI.ShowGameOver();
+        modesManager.PlayerDied();
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
