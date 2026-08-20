@@ -22,9 +22,12 @@ public class Bullet : MonoBehaviour
             collision.gameObject.GetComponent<EnemyHealth>().HitEffect();
             collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(20);
             collision.gameObject.GetComponent<EnemyHealth>().damageCounter+=20;
-            
-            
-
+        }
+        if (collision.gameObject.tag == "ChildEnemy")
+        {
+            Destroy(gameObject);
+            collision.gameObject.GetComponent<ChildEnemyHealth>().HitEffect();
+            collision.gameObject.GetComponent<ChildEnemyHealth>().TakeDamage(20);
         }
         if (collision.gameObject.tag == "End")
         {

@@ -31,7 +31,7 @@ public class PlayerDizzy : MonoBehaviour
         audioManager.PlayerDizzy();
         move.enabled=false;
         playerShoot.enabled=false;
-        enemyController.enabled=true;
+        //enemyController.enabled=true;
         EnemyAnimator.SetBool("SpecialAttack",false);
         yield return new WaitForSeconds(3);
         move.enabled=true;

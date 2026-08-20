@@ -10,6 +10,7 @@ TagManager:
   - HitPoint
   - End
   - Shield
+  - ChildEnemy
   layers:
   - Default
   - TransparentFX

@@ -46,6 +46,7 @@ public class EnemyHealth : MonoBehaviour
         if(damageCounter >= 200 && !isSpecialAttacking)
         {
             damageCounter-=200;
+            SpawnEnemys.instance.SpawnChildEnemy();
             StartCoroutine(SpecialAttack());
         }
         if (CurrentHealth <= 0)
@@ -65,7 +66,7 @@ public class EnemyHealth : MonoBehaviour
     {
         playerHealth.enabled=false;
         playerDamage.enabled=false;
-        EnemyAnimator.SetBool("IsDie",true);
+        EnemyAnimator.SetTrigger("IsDie");
         playerMovement.enabled=false;
         playerShoot.enabled=false;
         PlayerAnimator.SetBool("IsWin",true);
@@ -91,6 +92,6 @@ public class EnemyHealth : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         EnemyAnimator.SetBool("SpecialAttack",false);
         isSpecialAttacking=false;
-        enemyController.enabled=true;
+        //enemyController.enabled=true;
     }
 }
