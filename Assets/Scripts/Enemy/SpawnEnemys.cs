@@ -35,7 +35,7 @@ public class SpawnEnemys : MonoBehaviour
     public void ChildEnemyDied(GameObject deadEnemy)
     {
         deadEnemy.SetActive(false);
-
+        deadEnemy.transform.rotation = enemyController.gameObject.transform.rotation;
         if (AreAllChildEnemiesDead())
         {
             enemyController.enabled = true;
