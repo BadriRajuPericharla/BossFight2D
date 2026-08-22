@@ -39,7 +39,8 @@ public class ChildEnemyHealth : MonoBehaviour
                 return;
             FillArea.SetActive(false);
             StopAllCoroutines();
-            StartCoroutine(Die());
+            SpawnEnemys.instance.ChildEnemyDied(gameObject);
+            
             return;
         }
 
@@ -49,15 +50,11 @@ public class ChildEnemyHealth : MonoBehaviour
         bulletHitEffect.gameObject.SetActive(true);
         bulletHitEffect.Play();
     }
-    IEnumerator Die()
-    {
-        EnemyAnimator.SetTrigger("IsDie");
-        yield return new WaitForSeconds(1f);
-        SpawnEnemys.instance.ChildEnemyDied(gameObject);
-    }
-    void OnEnable()
-    {
-        CurrentHealth=MaxHealth;
-        childAnimator.ResetTrigger("IsDie");
-    }
+    // IEnumerator Die()
+    // {
+    //     EnemyAnimator.SetTrigger("IsDie");
+    //     yield return new WaitForSeconds(1f);
+    //     SpawnEnemys.instance.ChildEnemyDied(gameObject);
+    // }
+    
 }

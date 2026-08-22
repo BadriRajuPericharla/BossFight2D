@@ -6,6 +6,7 @@ using UnityEngine;
 public class SpawnEnemys : MonoBehaviour
 {
     [SerializeField]private EnemyController enemyController;
+    [SerializeField]private EnemyHealth enemyHealth;
     public static SpawnEnemys instance;
     void Awake()
     {
@@ -38,6 +39,8 @@ public class SpawnEnemys : MonoBehaviour
         deadEnemy.transform.rotation = enemyController.gameObject.transform.rotation;
         if (AreAllChildEnemiesDead())
         {
+            enemyHealth.enemyShield.SetActive(false);
+            enemyHealth.enemyShieldActive=false;
             enemyController.enabled = true;
         }
     }

@@ -20,6 +20,8 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField]private ParticleSystem bulletHitEffect;
     [SerializeField]private Slider slider;
     [SerializeField]private ModesManager modesManager;
+    public GameObject enemyShield;
+    public bool enemyShieldActive=false;
     private Modes.modes currentMode;
     public float CurrentHealth;
     public int damageCounter;
@@ -36,6 +38,7 @@ public class EnemyHealth : MonoBehaviour
     }
     public void TakeDamage(float Damage)
     {
+        if (enemyShieldActive) return;
         CurrentHealth-=Damage;
         if (currentMode!=Modes.modes.survival)
         {
@@ -81,6 +84,8 @@ public class EnemyHealth : MonoBehaviour
         if (currentMode!=Modes.modes.survival)
         {
             modesManager.shockWaveSlider.value=0;
+            enemyShield.SetActive(true);
+            enemyShieldActive=true;
         }
         
         isSpecialAttacking=true;
@@ -91,7 +96,12 @@ public class EnemyHealth : MonoBehaviour
         enemyController.enabled=false;
         yield return new WaitForSeconds(1.5f);
         EnemyAnimator.SetBool("SpecialAttack",false);
+        EnemyAnimator.SetBool("IsRun",false);
         isSpecialAttacking=false;
-        //enemyController.enabled=true;
+        if (currentMode == Modes.modes.survival)
+        {
+            enemyController.enabled=true;
+        }
+        
     }
 }
