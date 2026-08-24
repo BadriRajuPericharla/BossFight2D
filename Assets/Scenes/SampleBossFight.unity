@@ -7505,7 +7505,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &337351049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9258,11 +9258,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: -8.6
-  far clip plane: 100
+  near clip plane: 0
+  far clip plane: 1000.43
   field of view: 34
   orthographic: 1
-  orthographic size: 7.32
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -9287,7 +9287,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -4.2134474e-10, y: 0.0000000073947577, z: 6.135539e-16, w: 1}
-  m_LocalPosition: {x: -24.040504, y: 2.931271, z: -10}
+  m_LocalPosition: {x: -18.168873, y: 2.9584727, z: -10}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9624,7 +9624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 12
-  JumpForce: 14.5
+  JumpForce: 15
   Gravity: 20
   fallGravity: 35
   JumpCount: 0
@@ -13925,7 +13925,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1295447333
 MonoBehaviour:
   m_ObjectHideFlags: 0
