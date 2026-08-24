@@ -116,6 +116,11 @@ public class PlayerMovement : MonoBehaviour
             JumpCount=0;
             animator.SetBool("IsJump",false);  
         }
+        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "ChildEnemy")
+        {
+            isjumping=false;
+            animator.SetBool("IsJump",false);
+        }
     }
     public void JumpFromMobile()
     {
