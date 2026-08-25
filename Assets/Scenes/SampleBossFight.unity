@@ -14509,6 +14509,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyController: {fileID: 1343118644}
   enemyHealth: {fileID: 1343118648}
+  childEnemyHealth:
+  - {fileID: 7070090672401012989}
+  - {fileID: 449829883}
   childEnemyPrefab:
   - {fileID: 1096341636608568632}
   - {fileID: 449829881}

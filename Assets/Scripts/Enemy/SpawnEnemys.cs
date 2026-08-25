@@ -7,6 +7,7 @@ public class SpawnEnemys : MonoBehaviour
 {
     [SerializeField]private EnemyController enemyController;
     [SerializeField]private EnemyHealth enemyHealth;
+    [SerializeField]private ChildEnemyHealth[] childEnemyHealth;
     public static SpawnEnemys instance;
     void Awake()
     {
@@ -25,6 +26,7 @@ public class SpawnEnemys : MonoBehaviour
     {
         foreach(GameObject enemy in childEnemyPrefab)
         {
+            
             Vector3 pos=enemy.transform.position;
             pos.x=enemyController.gameObject.transform.position.x;
             enemy.transform.position=pos;
@@ -42,6 +44,13 @@ public class SpawnEnemys : MonoBehaviour
             enemyHealth.enemyShield.SetActive(false);
             enemyHealth.enemyShieldActive=false;
             enemyController.enabled = true;
+            foreach(ChildEnemyHealth childEnemyHealth in childEnemyHealth)
+            {
+                childEnemyHealth.CurrentHealth=childEnemyHealth.MaxHealth;
+                childEnemyHealth.slider.value=childEnemyHealth.CurrentHealth;
+                childEnemyHealth.FillArea.SetActive(true);
+            }
+                
         }
     }
 
@@ -54,7 +63,7 @@ public class SpawnEnemys : MonoBehaviour
                 return false;
             }
         }
-
+        
         return true;
     }
 

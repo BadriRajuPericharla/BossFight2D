@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class ChildEnemyHealth : MonoBehaviour
 {
-    [SerializeField]private float MaxHealth=500f;
-    [SerializeField]private GameObject FillArea;
+    public float MaxHealth=500f;
+    public GameObject FillArea;
     [SerializeField]private Animator EnemyAnimator;
 
 
@@ -17,7 +17,7 @@ public class ChildEnemyHealth : MonoBehaviour
 
     [SerializeField]private AudioManager audioManager;
     [SerializeField]private ParticleSystem bulletHitEffect;
-    [SerializeField]private Slider slider;
+    public Slider slider;
     [SerializeField]private Animator childAnimator;
     public float CurrentHealth;
     
