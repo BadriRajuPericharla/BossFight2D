@@ -18,6 +18,7 @@ public class UI : MonoBehaviour
     [SerializeField]private GameObject modesPanel;
     [SerializeField]private GameObject healthBars;
     [SerializeField]private GameObject pausePanel;
+    [SerializeField]private GameObject continuePanel;
     [Header("Monobehaviour Scripts")]
     [SerializeField]private MonoBehaviour movement;
     [SerializeField]private PlayerMovement playerMovement;
@@ -28,7 +29,7 @@ public class UI : MonoBehaviour
     [Header("Text")]
     [SerializeField]private TextMeshProUGUI countDownTxt;
   
-   
+    private static int continueCounter=0;
 
     static bool ShowModes=false;
     
@@ -134,7 +135,7 @@ public class UI : MonoBehaviour
     }
     public void Replay()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        AdsManager.Instance.ShowRetryAd();
     }
     public void Resume()
     {
@@ -143,15 +144,36 @@ public class UI : MonoBehaviour
     }
     public void ShowGameOver()
     {
-        GameOver.SetActive(true);
-        MobileControlPanel.SetActive(false);
-        healthBars.SetActive(false);
-        foreach(ChildEnemyController childEnemyController in chilEnemyController)
+        continueCounter++;
+        if (continueCounter >= 2)
         {
-            childEnemyController.enabled=false;
+            continuePanel.SetActive(true);
+            continueCounter=0;
+        }
+        else
+        {
+            GameOver.SetActive(true);
+            MobileControlPanel.SetActive(false);
+            healthBars.SetActive(false);
+            foreach(ChildEnemyController childEnemyController in chilEnemyController)
+            {
+                childEnemyController.enabled=false;
+            }
         }
         
-    }    
+        
+    }
+    public void ContinueButton()
+    {
+        continuePanel.SetActive(false);
+        movement.gameObject.GetComponent<PlayerHealth>().CurrentHealth=70f;
+        movement.gameObject.GetComponent<PlayerHealth>().healthSlider.value=70f;
+        movement.gameObject.GetComponent<PlayerHealth>().FillArea.SetActive(true);
+        movement.enabled=true;
+        movement.gameObject.SetActive(true);
+        enemyController.enabled=true;
+        AdsManager.Instance.ShowRewardedAd();
+    }
     public void ShowLevelComplete()
     {
         levelComplete.SetActive(true);

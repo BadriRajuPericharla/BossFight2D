@@ -7,14 +7,14 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] float MaxHealth=200f;
     public float CurrentHealth;
-    [SerializeField]private GameObject FillArea;
+    public GameObject FillArea;
     [SerializeField]private Animator PlayerAnimator;
     [SerializeField]private Animator enemyAnimator;
     [SerializeField]private EnemyController enemyController;
     [SerializeField]private PlayerMovement playerMovement;
     [SerializeField]private AudioManager audioManager;
     [SerializeField]private UI uI;
-    [SerializeField]private Slider healthSlider;
+    public Slider healthSlider;
     [SerializeField]private ModesManager modesManager;
     private PlayerDizzy playerDizzy;
     bool IsDead=false;
@@ -54,9 +54,9 @@ public class PlayerHealth : MonoBehaviour
         PlayerAnimator.SetBool("IsDie",true);
         enemyAnimator.SetBool("IsWin",true);
         yield return new WaitForSeconds(1f);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
         modesManager.PlayerDied();
     }
-    
+
 }
 
