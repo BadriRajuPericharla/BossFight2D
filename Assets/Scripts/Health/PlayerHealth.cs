@@ -14,7 +14,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField]private PlayerMovement playerMovement;
     [SerializeField]private AudioManager audioManager;
     [SerializeField]private UI uI;
-    [SerializeField]private Slider slider;
+    [SerializeField]private Slider healthSlider;
     [SerializeField]private ModesManager modesManager;
     private PlayerDizzy playerDizzy;
     bool IsDead=false;
@@ -30,16 +30,20 @@ public class PlayerHealth : MonoBehaviour
     {
         if(IsDead) return;
         if(PlayerShield.instance.shieldActivated) return;
-        CurrentHealth-=Damage;
-        
-        CurrentHealth=Mathf.Clamp(CurrentHealth,0,MaxHealth);
-        slider.value=CurrentHealth;
-        if (CurrentHealth <= 0)
+        else
         {
-            IsDead=true;
-            FillArea.SetActive(false);
-            StartCoroutine(Die());
+            CurrentHealth-=Damage;
+        
+            CurrentHealth=Mathf.Clamp(CurrentHealth,0,MaxHealth);
+            healthSlider.value=CurrentHealth;
+            if (CurrentHealth <= 0)
+            {
+                IsDead=true;
+                FillArea.SetActive(false);
+                StartCoroutine(Die());
+            }
         }
+        
     }
     IEnumerator Die()
     {
@@ -53,12 +57,6 @@ public class PlayerHealth : MonoBehaviour
         Destroy(gameObject);
         modesManager.PlayerDied();
     }
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Health")
-        {
-            CurrentHealth=MaxHealth;
-            collision.gameObject.SetActive(false);
-        }
-    }
+    
 }
+

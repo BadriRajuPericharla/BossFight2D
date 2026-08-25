@@ -24,7 +24,8 @@ public class EnemyHealth : MonoBehaviour
     public bool enemyShieldActive=false;
     private Modes.modes currentMode;
     public float CurrentHealth;
-    public int damageCounter;
+    public int fireBallDamageCounter;
+    private float damageCounter;
     bool isSpecialAttacking=false;
     void Start()
     {
@@ -40,18 +41,26 @@ public class EnemyHealth : MonoBehaviour
     {
         if (enemyShieldActive) return;
         CurrentHealth-=Damage;
+        
         if (currentMode!=Modes.modes.survival)
         {
-            modesManager.shockWaveSlider.value=damageCounter;
+            modesManager.shockWaveSlider.value=fireBallDamageCounter;
+            if(fireBallDamageCounter >= 200 && !isSpecialAttacking)
+            {
+                fireBallDamageCounter-=200;
+                modesManager.shockWaveSlider.value=fireBallDamageCounter;
+                StartCoroutine(SpecialAttack());
+            }
+            damageCounter+=Damage;
+            if (damageCounter >= 700)
+            {
+                damageCounter=0f;
+                SpawnEnemys.instance.SpawnChildEnemy();
+            }
         }
         CurrentHealth=Mathf.Clamp(CurrentHealth,0,MaxHealth);
         slider.value=CurrentHealth;
-        if(damageCounter >= 200 && !isSpecialAttacking)
-        {
-            damageCounter-=200;
-            SpawnEnemys.instance.SpawnChildEnemy();
-            StartCoroutine(SpecialAttack());
-        }
+        
         if (CurrentHealth <= 0)
         {
             FillArea.SetActive(false);
@@ -81,13 +90,6 @@ public class EnemyHealth : MonoBehaviour
     }
     public IEnumerator SpecialAttack()
     {
-        if (currentMode!=Modes.modes.survival)
-        {
-            modesManager.shockWaveSlider.value=0;
-            enemyShield.SetActive(true);
-            enemyShieldActive=true;
-        }
-        
         isSpecialAttacking=true;
         audioManager.SpecialAttackSound();
         EnemyAnimator.SetBool("IsAttack",false);
@@ -96,12 +98,7 @@ public class EnemyHealth : MonoBehaviour
         enemyController.enabled=false;
         yield return new WaitForSeconds(1.5f);
         EnemyAnimator.SetBool("SpecialAttack",false);
-        EnemyAnimator.SetBool("IsRun",false);
         isSpecialAttacking=false;
-        if (currentMode == Modes.modes.survival)
-        {
-            enemyController.enabled=true;
-        }
-        
+        enemyController.enabled=true; 
     }
 }

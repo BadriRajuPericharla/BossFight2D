@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
             if(collision.gameObject.GetComponent<EnemyHealth>().enemyShieldActive) return;
             collision.gameObject.GetComponent<EnemyHealth>().HitEffect();
             collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(20);
-            collision.gameObject.GetComponent<EnemyHealth>().damageCounter+=20;
+            collision.gameObject.GetComponent<EnemyHealth>().fireBallDamageCounter+=20;
         }
         if (collision.gameObject.tag == "ChildEnemy")
         {

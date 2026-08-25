@@ -16,7 +16,7 @@ public class ModesManager : MonoBehaviour
     [SerializeField]private UI uI;
     private float currentTime;
     private Modes.modes currentMode;
-    public float duration=100f;
+    public float duration=170f;
     public Slider shockWaveSlider;
     
     
@@ -45,8 +45,8 @@ public class ModesManager : MonoBehaviour
                 playerMovement.canAttack=true;
                 knifeAttackBtn.SetActive(true);
                 bulletAttackBtn.SetActive(true);
-                duration=300f;
-                enabled=true;
+                duration=120f;
+                timerText.enabled=true;
                 StartCoroutine(Timer());
             break;
             case Modes.modes.elimination:
@@ -115,7 +115,7 @@ public class ModesManager : MonoBehaviour
     IEnumerator Timer()
     {
         currentTime = duration;
-
+        Debug.Log("timer started");
         while (currentTime > 0)
         {
             currentTime -= Time.deltaTime;
@@ -127,7 +127,14 @@ public class ModesManager : MonoBehaviour
 
             yield return null;
         }
-        uI.ShowLevelComplete();
+        if(currentMode==Modes.modes.survival)
+            uI.ShowLevelComplete();
+        else
+        {
+            uI.ShowGameOver();
+            playerMovement.enabled=false;
+            enemyController.enabled=false;
+        }   
         timerText.text = "00:00";
     }
 

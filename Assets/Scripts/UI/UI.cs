@@ -23,9 +23,8 @@ public class UI : MonoBehaviour
     [SerializeField]private PlayerMovement playerMovement;
     [SerializeField]private EnemyController enemyController;
     [SerializeField]private PlayerShoot bulletScript;
+    [SerializeField]private ChildEnemyController[] chilEnemyController;
     [SerializeField]private Spikes spikesScript;  
-    [Header("ParticleSystems")]
-    [SerializeField]private ParticleSystem[] introParticleSystem;
     [Header("Text")]
     [SerializeField]private TextMeshProUGUI countDownTxt;
   
@@ -62,11 +61,6 @@ public class UI : MonoBehaviour
         {
             MainMenu.SetActive(false);
             Time.timeScale = 1f;
-
-            foreach (ParticleSystem particleSystem in introParticleSystem)
-            {
-                particleSystem.gameObject.SetActive(false);
-            }
 
             healthBars.SetActive(true);
             MobileControlPanel.SetActive(true);
@@ -122,11 +116,6 @@ public class UI : MonoBehaviour
     }
     public void ShowSettings()
     {
-        // if (MainMenu != null)
-        // {
-        //     MainMenu.SetActive(false);
-        // }
-        
         GameOver.SetActive(false);
         MobileControlPanel.SetActive(false);
         Settings.SetActive(true);
@@ -157,11 +146,20 @@ public class UI : MonoBehaviour
         GameOver.SetActive(true);
         MobileControlPanel.SetActive(false);
         healthBars.SetActive(false);
+        foreach(ChildEnemyController childEnemyController in chilEnemyController)
+        {
+            childEnemyController.enabled=false;
+        }
+        
     }    
     public void ShowLevelComplete()
     {
         levelComplete.SetActive(true);
         MobileControlPanel.SetActive(false);
+        foreach(ChildEnemyController childEnemyController in chilEnemyController)
+        {
+            childEnemyController.enabled=false;
+        }
     }
     public void ShowControls()
     {
@@ -171,7 +169,7 @@ public class UI : MonoBehaviour
     public void CloseSettings()
     {
         Settings.SetActive(false);
-        if (true)
+        if (!MainMenu.activeInHierarchy && true)
         {
             MobileControlPanel.SetActive(true);
             KeyboardContorlsPanel.SetActive(false);

@@ -8,6 +8,8 @@ public class SpawnEnemys : MonoBehaviour
     [SerializeField]private EnemyController enemyController;
     [SerializeField]private EnemyHealth enemyHealth;
     [SerializeField]private ChildEnemyHealth[] childEnemyHealth;
+    [SerializeField]private ModesManager modesManager;
+    [SerializeField]private GameObject enemyShield;
     public static SpawnEnemys instance;
     void Awake()
     {
@@ -27,6 +29,12 @@ public class SpawnEnemys : MonoBehaviour
         foreach(GameObject enemy in childEnemyPrefab)
         {
             
+        
+            modesManager.shockWaveSlider.value=0;
+            enemyShield.SetActive(true);
+            enemyController.animator.SetBool("IsRun",false);
+            enemyController.animator.SetBool("SpecialAttack",false);
+            enemyHealth.enemyShieldActive=true;
             Vector3 pos=enemy.transform.position;
             pos.x=enemyController.gameObject.transform.position.x;
             enemy.transform.position=pos;

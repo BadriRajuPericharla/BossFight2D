@@ -5,7 +5,7 @@ public class EnemyController : MonoBehaviour
 {
     public float Speed = 4f;
     [SerializeField] private Transform Player;
-    [SerializeField]private Animator animator;
+    public Animator animator;
     [SerializeField]private float StopDistance=4f;
     private bool shouldMove;
     private Vector2 targetPosition;
