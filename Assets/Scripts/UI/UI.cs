@@ -18,12 +18,14 @@ public class UI : MonoBehaviour
     [SerializeField]private GameObject modesPanel;
     [SerializeField]private GameObject healthBars;
     [SerializeField]private GameObject pausePanel;
-    [SerializeField]private GameObject continuePanel;
+    public GameObject continuePanel;
     [Header("Monobehaviour Scripts")]
     [SerializeField]private MonoBehaviour movement;
     [SerializeField]private PlayerMovement playerMovement;
     [SerializeField]private EnemyController enemyController;
     [SerializeField]private PlayerShoot bulletScript;
+    [SerializeField]private PlayerHealth playerHealth;
+    [SerializeField]private PlayerShield playerShield;
     [SerializeField]private ChildEnemyController[] chilEnemyController;
     [SerializeField]private Spikes spikesScript;  
     [Header("Text")]
@@ -105,11 +107,6 @@ public class UI : MonoBehaviour
     {
         Application.Quit();
     }
-    public void Restart()
-    {
-        SkipMenu=true;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
     public void ShowPausePanel()
     {
         pausePanel.SetActive(true);
@@ -135,6 +132,7 @@ public class UI : MonoBehaviour
     }
     public void Replay()
     {
+        SkipMenu=true;
         AdsManager.Instance.ShowRetryAd();
     }
     public void Resume()
@@ -147,7 +145,7 @@ public class UI : MonoBehaviour
         continueCounter++;
         if (continueCounter >= 2)
         {
-            continuePanel.SetActive(true);
+            AdsManager.Instance.ShowRewardedAd();
             continueCounter=0;
         }
         else
@@ -163,16 +161,32 @@ public class UI : MonoBehaviour
         
         
     }
-    public void ContinueButton()
+    public void CloseContinuePanel()
     {
         continuePanel.SetActive(false);
-        movement.gameObject.GetComponent<PlayerHealth>().CurrentHealth=70f;
-        movement.gameObject.GetComponent<PlayerHealth>().healthSlider.value=70f;
-        movement.gameObject.GetComponent<PlayerHealth>().FillArea.SetActive(true);
-        movement.enabled=true;
-        movement.gameObject.SetActive(true);
+        GameOver.SetActive(true);
+        MobileControlPanel.SetActive(false);
+        healthBars.SetActive(false);
+        foreach(ChildEnemyController childEnemyController in chilEnemyController)
+        {
+            childEnemyController.enabled=false;
+        }
+    }
+    public void ContinueButton()
+    {
+        StopAllCoroutines();
+        continuePanel.SetActive(false);
+        playerHealth.CurrentHealth=70f;
+        playerHealth.healthSlider.value=70f;
+        playerHealth.FillArea.SetActive(true);
+        playerHealth.IsDead=false;
+        AdsManager.Instance.PlayRewardedAd();
         enemyController.enabled=true;
-        AdsManager.Instance.ShowRewardedAd();
+        movement.gameObject.SetActive(true);
+        
+        
+        
+        
     }
     public void ShowLevelComplete()
     {
@@ -198,10 +212,15 @@ public class UI : MonoBehaviour
         }
         Time.timeScale=1f;
     }
-    IEnumerator ResumeTimer()
+    public IEnumerator ResumeTimer()
     {
-        Time.timeScale=0f;
         countDownTxt.gameObject.SetActive(true);
+        
+        yield return new WaitForSecondsRealtime(0.01f);
+        playerMovement.enabled=false;
+        bulletScript.enabled=false;
+        playerShield.enabled=false;
+        Time.timeScale=0f;
         countDownTxt.text="3";
         yield return new WaitForSecondsRealtime(1);
         countDownTxt.text="2";
@@ -215,6 +234,9 @@ public class UI : MonoBehaviour
             KeyboardContorlsPanel.SetActive(false);
         }
         Time.timeScale=1f;
+        playerMovement.enabled=true;
+        bulletScript.enabled=true;
+        playerShield.enabled=true;
         
     }
 }

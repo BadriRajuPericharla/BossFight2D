@@ -17,7 +17,7 @@ public class PlayerHealth : MonoBehaviour
     public Slider healthSlider;
     [SerializeField]private ModesManager modesManager;
     private PlayerDizzy playerDizzy;
-    bool IsDead=false;
+    public bool IsDead=false;
 
     void Start()
     {
@@ -52,9 +52,12 @@ public class PlayerHealth : MonoBehaviour
         playerDizzy.enabled=false;
         enemyController.enabled=false;
         PlayerAnimator.SetBool("IsDie",true);
-        enemyAnimator.SetBool("IsWin",true);
+        enemyAnimator.SetBool("SpecialAttack",false);
+        enemyAnimator.SetBool("IsAttack",false);
+        enemyAnimator.SetBool("IsRun",false);
         yield return new WaitForSeconds(1f);
         gameObject.SetActive(false);
+        playerMovement.enabled=true;
         modesManager.PlayerDied();
     }
 

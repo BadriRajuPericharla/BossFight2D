@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 
+using UnityEngine;
 public class PlayerDamage : MonoBehaviour
 {
    
@@ -14,7 +11,7 @@ public class PlayerDamage : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player" && !PlayerShield.instance.shieldActivated)
         {
-            
+
             playerHealth.TakeDamage(10);
             playerSpriteRenderer.color=Color.red;
         }

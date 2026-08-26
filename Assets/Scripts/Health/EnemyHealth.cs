@@ -99,6 +99,10 @@ public class EnemyHealth : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         EnemyAnimator.SetBool("SpecialAttack",false);
         isSpecialAttacking=false;
-        enemyController.enabled=true; 
+        if (!(damageCounter >= 700f))
+        {
+            enemyController.enabled=true;
+        }
+         
     }
 }
