@@ -46,17 +46,14 @@ public class AdsManager : MonoBehaviour
         {
             if (error != null)
             {
-                Debug.LogError("INTERSTITIAL LOAD ERROR: " + error);
                 return;
             }
 
             if (ad == null)
             {
-                Debug.LogError("INTERSTITIAL IS NULL");
                 return;
             }
 
-            Debug.Log("INTERSTITIAL LOADED");
 
             interstitial = ad;
 
@@ -139,7 +136,6 @@ public class AdsManager : MonoBehaviour
         rewarded.Show((Reward reward) =>
         {
             rewardEarned = true;
-            Debug.Log("Reward Earned!");
         });
     }
 
