@@ -176,7 +176,7 @@ PlayerSettings:
     tvOS: 0
   overrideDefaultApplicationIdentifier: 0
   AndroidBundleVersionCode: 1
-  AndroidMinSdkVersion: 22
+  AndroidMinSdkVersion: 24
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
   aotOptions: 
@@ -296,7 +296,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 190995616dc37b343935bb947575177a, type: 3}
+      m_Icon: {fileID: 2800000, guid: a720224558c1ebd4bbbcfacd7d9d6c7f, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
