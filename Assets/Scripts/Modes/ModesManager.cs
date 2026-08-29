@@ -60,21 +60,10 @@ public class ModesManager : MonoBehaviour
     }
     public void PlayerDied()
     {
-        StopAllCoroutines();
-
+        Time.timeScale=0f;
         if (enemyHealth != null)
         {
             enemyHealth.StopAllCoroutines();
-        }
-
-        if (timerText != null)
-        {
-            timerText.enabled = false;
-        }
-
-        if (shockWaveSlider != null)
-        {
-            shockWaveSlider.gameObject.SetActive(false);
         }
         uI.ShowGameOver();
     }
@@ -92,7 +81,7 @@ public class ModesManager : MonoBehaviour
     }
 
 
-    IEnumerator ParticleSpawner()
+    public IEnumerator ParticleSpawner()
     {
         shockWaveSlider.value = 0;
         shockWaveSlider.maxValue = 15f;

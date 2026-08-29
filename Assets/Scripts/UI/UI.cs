@@ -28,12 +28,10 @@ public class UI : MonoBehaviour
     [SerializeField]private PlayerHealth playerHealth;
     [SerializeField]private PlayerShield playerShield;
     [SerializeField]private ChildEnemyController[] chilEnemyController;
+    [SerializeField]private ModesManager modesManager;
     [SerializeField]private Spikes spikesScript;
     [Header("Text")]
     [SerializeField]private TextMeshProUGUI countDownTxt;
-    [SerializeField]private TextMeshProUGUI timerTxt;
-    [Header("Sliders")]
-    [SerializeField]private Slider shockWaveSlider;
 
   
     private static int continueCounter=0;
@@ -220,8 +218,6 @@ public class UI : MonoBehaviour
         playerShield.enabled = false;
         enemyController.enabled = false;
         yield return new WaitForSeconds(0.05f);
-        timerTxt.enabled=true;
-        shockWaveSlider.enabled=true;
         Time.timeScale = 0f;
         countDownTxt.gameObject.SetActive(true);
         countDownTxt.text = "3";
