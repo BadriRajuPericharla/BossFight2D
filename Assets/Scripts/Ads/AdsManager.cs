@@ -7,159 +7,196 @@ using TMPro;
 public class AdsManager : MonoBehaviour
 {
     public static AdsManager Instance;
-
-    [SerializeField]private GameObject checkInternet;
-    [SerializeField]private UI uI;
-    [SerializeField]private TextMeshProUGUI countDownTxt;
-
-    InterstitialAd interstitial;
-    RewardedInterstitialAd rewarded;
-
+    [SerializeField] private UI uI;
+    [SerializeField] private TextMeshProUGUI countDownTxt;
+    private InterstitialAd interstitial;
+    private RewardedInterstitialAd rewarded;
     private static int retryCount;
-
-    string interstitialId = "ca-app-pub-9565881819222312/3046886573";
-    string rewardedId = "ca-app-pub-9565881819222312/3792107556";
-
-    void Awake()
+    private string interstitialId = "ca-app-pub-9565881819222312/3046886573";
+    private string rewardedId = "ca-app-pub-3940256099942544/5354046379";
+    private bool isShowingRewardedAd;
+    private bool rewardEarned;
+    private Coroutine continueCountdown;
+    private void Awake()
     {
-        if (Instance != null)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
-
         Instance = this;
-
-        MobileAds.Initialize(_ =>
+        MobileAds.Initialize(initStatus =>
         {
             LoadInterstitial();
             LoadRewarded();
         });
     }
-
-
-    void LoadInterstitial()
+    private void LoadInterstitial()
     {
-        interstitial?.Destroy();
-
-        InterstitialAd.Load(interstitialId, new AdRequest(), (ad, error) =>
+        if (interstitial != null)
         {
-            if (error != null)
+            interstitial.Destroy();
+            interstitial = null;
+        }
+        InterstitialAd.Load(interstitialId,new AdRequest(),(ad, error) =>
             {
-                return;
+                if (error != null)
+                {
+                    return;
+                }
+
+                if (ad == null)
+                {
+                    return;
+                }
+                interstitial = ad;
+                ad.OnAdFullScreenContentClosed +=HandleInterstitialClosed;
+                ad.OnAdFullScreenContentFailed +=HandleInterstitialFailed;
             }
-
-            if (ad == null)
-            {
-                return;
-            }
-
-
-            interstitial = ad;
-
-            ad.OnAdFullScreenContentClosed += () =>
-            {
-                LoadInterstitial();
-                SceneManager.LoadScene(
-                    SceneManager.GetActiveScene().buildIndex
-                );
-            };
-        });
+        );
     }
+
+
+    private void HandleInterstitialClosed()
+    {
+        LoadInterstitial();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+
+    private void HandleInterstitialFailed(AdError error)
+    {
+        LoadInterstitial();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
 
     public void ShowRetryAd()
     {
         retryCount++;
-        Debug.Log(retryCount);
-        if (retryCount % 3 == 0 && interstitial?.CanShowAd() == true)
+        if (retryCount>= 3 &&interstitial != null &&interstitial.CanShowAd())
         {
+            retryCount = 0;
             interstitial.Show();
-            retryCount=0;
         }
-            
         else
-            SceneManager.LoadScene(
-                SceneManager.GetActiveScene().buildIndex
-            );
-    }
-
-
-    void LoadRewarded()
-    {
-        rewarded?.Destroy();
-
-        RewardedInterstitialAd.Load(rewardedId, new AdRequest(), (ad, error) =>
         {
-            if (error != null || ad == null)
-                return;
-
-            rewarded = ad;
-
-            ad.OnAdFullScreenContentClosed += LoadRewarded;
-        });
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
+    private void LoadRewarded()
+    {
+        if (rewarded != null)
+        {
+            rewarded.Destroy();
+            rewarded = null;
+        }
+        RewardedInterstitialAd.Load(rewardedId,new AdRequest(),(ad, error) =>
+            {
+                if (error != null)
+                {
+                    return;
+                }
 
+                if (ad == null)
+                {
+                    return;
+                }
+                rewarded = ad;
+                ad.OnAdFullScreenContentClosed +=HandleRewardedClosed;
+                ad.OnAdFullScreenContentFailed +=HandleRewardedFailed;
+            }
+        );
+    }
     public void ShowRewardedAd()
     {
-        if (rewarded?.CanShowAd() == true)
+        if (isShowingRewardedAd)
         {
-            uI.continuePanel.SetActive(true);
-            StartCoroutine(ContinuePanelCountDown());
+
+            return;
+        }
+        if (rewarded != null &&rewarded.CanShowAd())
+        {
+            uI.continuePanel.SetActive(true);    
+            if (continueCountdown != null)
+            {
+                StopCoroutine(continueCountdown);
+            }
+            continueCountdown =StartCoroutine(ContinuePanelCountDown());
         }
         else
         {
-            uI.ShowGameOver();
+            uI.continuePanel.SetActive(false);
+            LoadRewarded();
         }
     }
-
     public void PlayRewardedAd()
     {
-        if (rewarded?.CanShowAd() != true)
+        if (continueCountdown != null)
         {
-            uI.continuePanel.SetActive(false);
-            uI.ShowGameOver();
+            StopCoroutine(continueCountdown);
+            continueCountdown = null;
+        }
+        if (isShowingRewardedAd)
+        {
             return;
         }
 
-        bool rewardEarned = false;
-
-        rewarded.OnAdFullScreenContentClosed += () =>
+        if (rewarded == null || !rewarded.CanShowAd())
         {
-            if (rewardEarned)
-            {
-                uI.StartCoroutine(uI.ResumeTimer());
-            }
-
+            uI.continuePanel.SetActive(false);
+            uI.ShowGameOver();
             LoadRewarded();
-        };
-
-        rewarded.Show((Reward reward) =>
+            return;
+        }
+        isShowingRewardedAd = true;
+        rewardEarned = false;
+        RewardedInterstitialAd currentAd = rewarded;
+        rewarded = null;
+        uI.continuePanel.SetActive(false);
+        currentAd.Show((Reward reward) =>{rewardEarned = true;});
+    }
+    private void HandleRewardedClosed()
+    {
+        isShowingRewardedAd = false;
+        if (rewardEarned)
         {
-            rewardEarned = true;
-        });
+            uI.StartCoroutine(uI.ResumeTimer());
+        }
+        else
+        {
+            uI.ShowGameOver();
+        }
+        rewardEarned = false;
+        LoadRewarded();
+    }
+    private void HandleRewardedFailed(
+        AdError error
+    )
+    {
+        isShowingRewardedAd = false;
+        rewardEarned = false;
+        uI.continuePanel.SetActive(false);
+        uI.ShowGameOver();
+        LoadRewarded();
     }
 
-
-    IEnumerator CheckInternet()
+    private IEnumerator ContinuePanelCountDown()
     {
-        checkInternet.SetActive(true);
-
-        yield return new WaitForSeconds(1f);
-
-        checkInternet.SetActive(false);
-    }
-    IEnumerator ContinuePanelCountDown()
-    {
-        countDownTxt.text="5";
-        yield return new WaitForSeconds(1f);
-        countDownTxt.text="4";
-        yield return new WaitForSeconds(1f);
-        countDownTxt.text="3";
-        yield return new WaitForSeconds(1f);
-        countDownTxt.text="2";
-        yield return new WaitForSeconds(1f);
-        countDownTxt.text="1";
-        yield return new WaitForSeconds(1f);
-        uI.CloseContinuePanel();
+        countDownTxt.text = "5";
+        yield return new WaitForSecondsRealtime(1f);
+        countDownTxt.text = "4";
+        yield return new WaitForSecondsRealtime(1f);
+        countDownTxt.text = "3";
+        yield return new WaitForSecondsRealtime(1f);
+        countDownTxt.text = "2";
+        yield return new WaitForSecondsRealtime(1f);
+        countDownTxt.text = "1";
+        yield return new WaitForSecondsRealtime(1f);
+        continueCountdown = null;
+        if (uI.continuePanel.activeSelf)
+        {
+            uI.CloseContinuePanel();
+        }
     }
 }

@@ -5,6 +5,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
@@ -27,9 +28,13 @@ public class UI : MonoBehaviour
     [SerializeField]private PlayerHealth playerHealth;
     [SerializeField]private PlayerShield playerShield;
     [SerializeField]private ChildEnemyController[] chilEnemyController;
-    [SerializeField]private Spikes spikesScript;  
+    [SerializeField]private Spikes spikesScript;
     [Header("Text")]
     [SerializeField]private TextMeshProUGUI countDownTxt;
+    [SerializeField]private TextMeshProUGUI timerTxt;
+    [Header("Sliders")]
+    [SerializeField]private Slider shockWaveSlider;
+
   
     private static int continueCounter=0;
 
@@ -145,8 +150,8 @@ public class UI : MonoBehaviour
         continueCounter++;
         if (continueCounter >= 2)
         {
-            AdsManager.Instance.ShowRewardedAd();
             continueCounter=0;
+            AdsManager.Instance.ShowRewardedAd();
         }
         else
         {
@@ -174,19 +179,8 @@ public class UI : MonoBehaviour
     }
     public void ContinueButton()
     {
-        StopAllCoroutines();
         continuePanel.SetActive(false);
-        playerHealth.CurrentHealth=70f;
-        playerHealth.healthSlider.value=70f;
-        playerHealth.FillArea.SetActive(true);
-        playerHealth.IsDead=false;
         AdsManager.Instance.PlayRewardedAd();
-        enemyController.enabled=true;
-        movement.gameObject.SetActive(true);
-        
-        
-        
-        
     }
     public void ShowLevelComplete()
     {
@@ -214,29 +208,35 @@ public class UI : MonoBehaviour
     }
     public IEnumerator ResumeTimer()
     {
+        GameOver.SetActive(false);
+        continuePanel.SetActive(false);
+        playerHealth.CurrentHealth = 70f;
+        playerHealth.healthSlider.value = 70f;
+        playerHealth.FillArea.SetActive(true);
+        playerHealth.IsDead = false;
+        movement.gameObject.SetActive(true);
+        playerMovement.enabled = false;
+        bulletScript.enabled = false;
+        playerShield.enabled = false;
+        enemyController.enabled = false;
+        yield return new WaitForSeconds(0.05f);
+        timerTxt.enabled=true;
+        shockWaveSlider.enabled=true;
+        Time.timeScale = 0f;
         countDownTxt.gameObject.SetActive(true);
-        
-        yield return new WaitForSecondsRealtime(0.01f);
-        playerMovement.enabled=false;
-        bulletScript.enabled=false;
-        playerShield.enabled=false;
-        Time.timeScale=0f;
-        countDownTxt.text="3";
-        yield return new WaitForSecondsRealtime(1);
-        countDownTxt.text="2";
-        yield return new WaitForSecondsRealtime(1);
-        countDownTxt.text="1";
-        yield return new WaitForSecondsRealtime(1);
+        countDownTxt.text = "3";
+        yield return new WaitForSecondsRealtime(1f);
+        countDownTxt.text = "2";
+        yield return new WaitForSecondsRealtime(1f);
+        countDownTxt.text = "1";
+        yield return new WaitForSecondsRealtime(1f);
         countDownTxt.gameObject.SetActive(false);
-        if (true)
-        {
-            MobileControlPanel.SetActive(true);
-            KeyboardContorlsPanel.SetActive(false);
-        }
-        Time.timeScale=1f;
-        playerMovement.enabled=true;
-        bulletScript.enabled=true;
-        playerShield.enabled=true;
-        
+        MobileControlPanel.SetActive(true);
+        KeyboardContorlsPanel.SetActive(false);
+        enemyController.enabled = true;
+        playerMovement.enabled = true;
+        bulletScript.enabled = true;
+        playerShield.enabled = true;
+        Time.timeScale = 1f;
     }
 }

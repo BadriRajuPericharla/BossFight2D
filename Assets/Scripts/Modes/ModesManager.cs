@@ -15,7 +15,7 @@ public class ModesManager : MonoBehaviour
     [SerializeField]private TextMeshProUGUI timerText;
     [SerializeField]private UI uI;
     private float currentTime;
-    private Modes.modes currentMode;
+    public Modes.modes currentMode;
     public float duration=170f;
     public Slider shockWaveSlider;
     
@@ -115,7 +115,6 @@ public class ModesManager : MonoBehaviour
     IEnumerator Timer()
     {
         currentTime = duration;
-        Debug.Log("timer started");
         while (currentTime > 0)
         {
             currentTime -= Time.deltaTime;

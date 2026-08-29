@@ -57,7 +57,6 @@ public class PlayerHealth : MonoBehaviour
         enemyAnimator.SetBool("IsRun",false);
         yield return new WaitForSeconds(1f);
         gameObject.SetActive(false);
-        playerMovement.enabled=true;
         modesManager.PlayerDied();
     }
 
