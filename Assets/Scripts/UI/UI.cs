@@ -217,7 +217,7 @@ public class UI : MonoBehaviour
         bulletScript.enabled = false;
         playerShield.enabled = false;
         enemyController.enabled = false;
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSecondsRealtime(0.1f);
         Time.timeScale = 0f;
         countDownTxt.gameObject.SetActive(true);
         countDownTxt.text = "3";

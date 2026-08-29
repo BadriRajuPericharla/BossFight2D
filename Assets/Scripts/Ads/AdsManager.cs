@@ -13,7 +13,7 @@ public class AdsManager : MonoBehaviour
     private RewardedInterstitialAd rewarded;
     private static int retryCount;
     private string interstitialId = "ca-app-pub-9565881819222312/3046886573";
-    private string rewardedId = "ca-app-pub-3940256099942544/5354046379";
+    private string rewardedId = "ca-app-pub-9565881819222312/3792107556";
     private bool isShowingRewardedAd;
     private bool rewardEarned;
     private Coroutine continueCountdown;
@@ -126,8 +126,7 @@ public class AdsManager : MonoBehaviour
         }
         else
         {
-            uI.continuePanel.SetActive(false);
-            LoadRewarded();
+            uI.ShowGameOver();
         }
     }
     public void PlayRewardedAd()
