@@ -9667,7 +9667,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &537277163
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23488,7 +23488,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1683839593
 RectTransform:
   m_ObjectHideFlags: 0
@@ -31514,7 +31514,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1966926954
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32509,7 +32509,7 @@ MonoBehaviour:
   timerImage: {fileID: 1747997961}
   uI: {fileID: 448046140}
   currentMode: 0
-  duration: 50
+  duration: 130
   shockWaveSlider: {fileID: 1624091051}
 --- !u!4 &2082430936
 Transform:
