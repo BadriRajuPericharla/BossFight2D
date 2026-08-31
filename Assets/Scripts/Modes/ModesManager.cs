@@ -13,11 +13,13 @@ public class ModesManager : MonoBehaviour
     [SerializeField]private GameObject knifeAttackBtn;
     [SerializeField]private GameObject bulletAttackBtn;
     [SerializeField]private TextMeshProUGUI timerText;
+    [SerializeField]private GameObject timerImage;
     [SerializeField]private UI uI;
     private float currentTime;
     public Modes.modes currentMode;
     public float duration=170f;
     public Slider shockWaveSlider;
+    public Coroutine timerCouroutine;
     
     
     void Start()
@@ -35,8 +37,9 @@ public class ModesManager : MonoBehaviour
                 bulletAttackBtn.SetActive(false);
                 enemyController.Speed*=2f;
                 shockWaveSlider.gameObject.SetActive(true);
+                timerImage.SetActive(true);
                 timerText.enabled=true;
-                StartCoroutine(Timer());
+                timerCouroutine=StartCoroutine(Timer());
                 StartCoroutine(EnemyDamage());
                 StartCoroutine(ParticleSpawner());
             break;
@@ -46,8 +49,9 @@ public class ModesManager : MonoBehaviour
                 knifeAttackBtn.SetActive(true);
                 bulletAttackBtn.SetActive(true);
                 duration=120f;
+                timerImage.SetActive(true);
                 timerText.enabled=true;
-                StartCoroutine(Timer());
+                timerCouroutine=StartCoroutine(Timer());
             break;
             case Modes.modes.elimination:
                 Time.timeScale=1f;
@@ -101,7 +105,7 @@ public class ModesManager : MonoBehaviour
         }
         shockWaveSlider.gameObject.SetActive(false);
     }
-    IEnumerator Timer()
+    public IEnumerator Timer()
     {
         currentTime = duration;
         while (currentTime > 0)

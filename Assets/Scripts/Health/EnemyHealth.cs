@@ -55,6 +55,7 @@ public class EnemyHealth : MonoBehaviour
             if (damageCounter >= 700)
             {
                 damageCounter=0f;
+                EnemyAnimator.SetBool("IsAttack",false);
                 SpawnEnemys.instance.SpawnChildEnemy();
             }
         }
@@ -76,6 +77,10 @@ public class EnemyHealth : MonoBehaviour
     }
     IEnumerator Die()
     {
+        if (currentMode == Modes.modes.challenge)
+        {
+            modesManager.StopCoroutine(modesManager.timerCouroutine);
+        }
         playerHealth.enabled=false;
         playerDamage.enabled=false;
         EnemyAnimator.SetTrigger("IsDie");

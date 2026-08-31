@@ -184,6 +184,7 @@ public class UI : MonoBehaviour
     {
         levelComplete.SetActive(true);
         MobileControlPanel.SetActive(false);
+        healthBars.SetActive(false);
         foreach(ChildEnemyController childEnemyController in chilEnemyController)
         {
             childEnemyController.enabled=false;
