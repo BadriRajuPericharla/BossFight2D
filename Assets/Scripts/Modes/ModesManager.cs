@@ -32,6 +32,7 @@ public class ModesManager : MonoBehaviour
             
             case Modes.modes.survival:
                 Time.timeScale=1f;
+                uI.CloseSurvivalWarning();
                 playerMovement.canAttack=false;
                 knifeAttackBtn.SetActive(false);
                 bulletAttackBtn.SetActive(false);
@@ -45,6 +46,7 @@ public class ModesManager : MonoBehaviour
             break;
             case Modes.modes.challenge:
                 Time.timeScale=1f;
+                uI.CloseChallengeWarning();
                 playerMovement.canAttack=true;
                 knifeAttackBtn.SetActive(true);
                 bulletAttackBtn.SetActive(true);
@@ -55,6 +57,7 @@ public class ModesManager : MonoBehaviour
             break;
             case Modes.modes.elimination:
                 Time.timeScale=1f;
+                uI.CloseEliminationWarning();
                 playerMovement.canAttack=true;
                 knifeAttackBtn.SetActive(true);
                 bulletAttackBtn.SetActive(true);

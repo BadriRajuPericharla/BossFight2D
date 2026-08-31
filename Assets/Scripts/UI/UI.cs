@@ -19,6 +19,11 @@ public class UI : MonoBehaviour
     [SerializeField]private GameObject modesPanel;
     [SerializeField]private GameObject healthBars;
     [SerializeField]private GameObject pausePanel;
+    [SerializeField]private GameObject informationPanel;
+    [SerializeField]private GameObject survivalInformation;
+    [SerializeField]private GameObject challengeInformation;
+    [SerializeField]private GameObject eliminationInformation;
+    
     public GameObject continuePanel;
     [Header("Monobehaviour Scripts")]
     [SerializeField]private MonoBehaviour movement;
@@ -105,6 +110,40 @@ public class UI : MonoBehaviour
         modesPanel.SetActive(true);
         
        
+    }
+    public void SurvivalWarning()
+    {
+        modesPanel.SetActive(false);
+        informationPanel.SetActive(true);
+        survivalInformation.SetActive(true);
+    }
+    public void CloseSurvivalWarning()
+    {
+        informationPanel.SetActive(false);
+        survivalInformation.SetActive(false);
+    }
+    public void ChallengeWarning()
+    {
+        modesPanel.SetActive(false);
+        informationPanel.SetActive(true);
+        challengeInformation.SetActive(true);
+    }
+    public void CloseChallengeWarning()
+    {
+
+        informationPanel.SetActive(false);
+        challengeInformation.SetActive(false);
+    }
+    public void EliminationWarning()
+    {
+        modesPanel.SetActive(false);
+        informationPanel.SetActive(true);
+        eliminationInformation.SetActive(true);
+    }
+    public void CloseEliminationWarning()
+    {
+        informationPanel.SetActive(false);
+        eliminationInformation.SetActive(false);
     }
     public void Quit()
     {

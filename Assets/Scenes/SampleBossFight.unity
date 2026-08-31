@@ -7570,7 +7570,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 318, y: 378}
+  m_AnchoredPosition: {x: 406, y: 343}
   m_SizeDelta: {x: 107.697, y: 101.415}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &289859290
@@ -8894,6 +8894,10 @@ MonoBehaviour:
   modesPanel: {fileID: 2018148730}
   healthBars: {fileID: 37409849}
   pausePanel: {fileID: 170182107}
+  informationPanel: {fileID: 1966926953}
+  survivalInformation: {fileID: 537277162}
+  challengeInformation: {fileID: 782577944}
+  eliminationInformation: {fileID: 1920355804}
   continuePanel: {fileID: 1683839592}
   movement: {fileID: 583317587}
   playerMovement: {fileID: 583317586}
@@ -9663,7 +9667,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &537277163
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10995,9 +10999,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 448046143}
-        m_TargetAssemblyTypeName: Modes, Assembly-CSharp
-        m_MethodName: EliminationMode
+      - m_Target: {fileID: 448046140}
+        m_TargetAssemblyTypeName: UI, Assembly-CSharp
+        m_MethodName: EliminationWarning
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11271,7 +11275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &782577945
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11312,7 +11316,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3bdf2c5b7ae28e247aeb1b8ed2d0bb86, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6b5c137c67706c542b801920c3c1a8a2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -15742,9 +15746,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 448046143}
-        m_TargetAssemblyTypeName: Modes, Assembly-CSharp
-        m_MethodName: SurvivalMode
+      - m_Target: {fileID: 448046140}
+        m_TargetAssemblyTypeName: UI, Assembly-CSharp
+        m_MethodName: SurvivalWarning
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16086,9 +16090,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 448046143}
-        m_TargetAssemblyTypeName: Modes, Assembly-CSharp
-        m_MethodName: ChallengeMode
+      - m_Target: {fileID: 448046140}
+        m_TargetAssemblyTypeName: UI, Assembly-CSharp
+        m_MethodName: ChallengeWarning
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -23484,7 +23488,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1683839593
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24193,7 +24197,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 448046143}
         m_TargetAssemblyTypeName: Modes, Assembly-CSharp
-        m_MethodName: SurvivalMode
+        m_MethodName: ChallengeMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -29362,7 +29366,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 448046143}
         m_TargetAssemblyTypeName: Modes, Assembly-CSharp
-        m_MethodName: SurvivalMode
+        m_MethodName: EliminationMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -30891,7 +30895,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1920355805
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30932,7 +30936,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3bdf2c5b7ae28e247aeb1b8ed2d0bb86, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 907360281e63edd4e91d9ac5b7b6469d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -31510,7 +31514,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1966926954
 RectTransform:
   m_ObjectHideFlags: 0
