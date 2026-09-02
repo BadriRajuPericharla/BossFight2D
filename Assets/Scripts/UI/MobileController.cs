@@ -7,8 +7,19 @@ public class MobileController : MonoBehaviour
 {
     [SerializeField]private PlayerMovement playerMovement;
     [SerializeField]private PlayerShoot playerShoot;
-    
-   
+    [SerializeField]private UI uI;
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            uI.ShowPausePanel();
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            uI.ShowSettings();
+        }
+    }
+
     public void leftmove()
     {
         playerMovement.MoveInput=-1;

@@ -25,8 +25,6 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         Rb=GetComponent<Rigidbody2D>();
-        
-       
     }
     public void Attack()
     {

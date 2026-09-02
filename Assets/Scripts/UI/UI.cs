@@ -15,7 +15,8 @@ public class UI : MonoBehaviour
     [SerializeField]private GameObject levelComplete;
     [SerializeField]private GameObject Settings;
     [SerializeField]private GameObject MobileControlPanel;
-    [SerializeField]private GameObject KeyboardContorlsPanel;
+    [SerializeField]private GameObject KeyboardContorlsBtn;
+    [SerializeField]private GameObject KeyboardControlsPanel;
     [SerializeField]private GameObject modesPanel;
     [SerializeField]private GameObject healthBars;
     [SerializeField]private GameObject pausePanel;
@@ -74,8 +75,13 @@ public class UI : MonoBehaviour
             Time.timeScale = 1f;
 
             healthBars.SetActive(true);
-            MobileControlPanel.SetActive(true);
-
+            if (Application.isMobilePlatform)
+            {
+                MobileControlPanel.SetActive(true);
+                KeyboardContorlsBtn.SetActive(false);
+            } 
+            else
+                KeyboardContorlsBtn.SetActive(true);
             spikesScript.enabled = true;
             bulletScript.enabled = true;
 
@@ -97,8 +103,6 @@ public class UI : MonoBehaviour
         }
         
     }
-
-    
     public void showMainMenu()
     {
         SceneManager.LoadScene(0);
@@ -108,8 +112,6 @@ public class UI : MonoBehaviour
         SkipMenu=true;
         MainMenu.SetActive(false);
         modesPanel.SetActive(true);
-        
-       
     }
     public void SurvivalWarning()
     {
@@ -157,7 +159,8 @@ public class UI : MonoBehaviour
     public void ShowSettings()
     {
         GameOver.SetActive(false);
-        MobileControlPanel.SetActive(false);
+        if(Application.isMobilePlatform)
+            MobileControlPanel.SetActive(false);
         Settings.SetActive(true);
         Time.timeScale=0f;
     }
@@ -193,7 +196,8 @@ public class UI : MonoBehaviour
         else
         {
             GameOver.SetActive(true);
-            MobileControlPanel.SetActive(false);
+            if(Application.isMobilePlatform)
+                MobileControlPanel.SetActive(false);
             healthBars.SetActive(false);
             foreach(ChildEnemyController childEnemyController in chilEnemyController)
             {
@@ -207,7 +211,8 @@ public class UI : MonoBehaviour
     {
         continuePanel.SetActive(false);
         GameOver.SetActive(true);
-        MobileControlPanel.SetActive(false);
+        if(Application.isMobilePlatform)
+            MobileControlPanel.SetActive(false);
         healthBars.SetActive(false);
         foreach(ChildEnemyController childEnemyController in chilEnemyController)
         {
@@ -222,7 +227,8 @@ public class UI : MonoBehaviour
     public void ShowLevelComplete()
     {
         levelComplete.SetActive(true);
-        MobileControlPanel.SetActive(false);
+        if(Application.isMobilePlatform)
+            MobileControlPanel.SetActive(false);
         healthBars.SetActive(false);
         foreach(ChildEnemyController childEnemyController in chilEnemyController)
         {
@@ -231,16 +237,16 @@ public class UI : MonoBehaviour
     }
     public void ShowControls()
     {
-        KeyboardContorlsPanel.SetActive(true);
+        KeyboardControlsPanel.SetActive(true);
         Time.timeScale=0f;
     }
     public void CloseSettings()
     {
         Settings.SetActive(false);
-        if (!MainMenu.activeInHierarchy && true)
+        if (!MainMenu.activeInHierarchy && Application.isMobilePlatform)
         {
             MobileControlPanel.SetActive(true);
-            KeyboardContorlsPanel.SetActive(false);
+            KeyboardContorlsBtn.SetActive(false);
         }
         Time.timeScale=1f;
     }
@@ -248,6 +254,8 @@ public class UI : MonoBehaviour
     {
         GameOver.SetActive(false);
         continuePanel.SetActive(false);
+        if(!Application.isMobilePlatform)
+            KeyboardControlsPanel.SetActive(false);
         playerHealth.CurrentHealth = 70f;
         playerHealth.healthSlider.value = 70f;
         playerHealth.FillArea.SetActive(true);
@@ -267,8 +275,8 @@ public class UI : MonoBehaviour
         countDownTxt.text = "1";
         yield return new WaitForSecondsRealtime(1f);
         countDownTxt.gameObject.SetActive(false);
-        MobileControlPanel.SetActive(true);
-        KeyboardContorlsPanel.SetActive(false);
+        if(Application.isMobilePlatform)
+            MobileControlPanel.SetActive(true);
         enemyController.enabled = true;
         playerMovement.enabled = true;
         bulletScript.enabled = true;

@@ -54,7 +54,6 @@ public class PlayerShield : MonoBehaviour
         {
             time += Time.deltaTime;
             image.fillAmount = time / duration;
-
             yield return null;
         }
 
