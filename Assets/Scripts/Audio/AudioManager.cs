@@ -12,6 +12,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField]private AudioClip JumpClip;
     [SerializeField]private AudioClip PlayerDieClip;
     [SerializeField]private AudioClip SpecialAttackClip;
+    [SerializeField]private AudioClip buttonClick;
     AudioSource audioSource;
     void Start()
     {
@@ -55,5 +56,9 @@ public class AudioManager : MonoBehaviour
     public void SpecialAttackSound()
     {
         audioSource.PlayOneShot(SpecialAttackClip);
+    }
+    public void PlayButtonClick()
+    {
+        audioSource.PlayOneShot(buttonClick);
     }
 }

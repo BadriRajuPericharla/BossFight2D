@@ -1,11 +1,8 @@
 
 using System.Collections;
-using System.Threading;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
@@ -24,7 +21,6 @@ public class UI : MonoBehaviour
     [SerializeField]private GameObject survivalInformation;
     [SerializeField]private GameObject challengeInformation;
     [SerializeField]private GameObject eliminationInformation;
-    
     public GameObject continuePanel;
     [Header("Monobehaviour Scripts")]
     [SerializeField]private MonoBehaviour movement;
@@ -36,6 +32,7 @@ public class UI : MonoBehaviour
     [SerializeField]private ChildEnemyController[] chilEnemyController;
     [SerializeField]private ModesManager modesManager;
     [SerializeField]private Spikes spikesScript;
+    [SerializeField]private AudioManager audioManager;
     [Header("Text")]
     [SerializeField]private TextMeshProUGUI countDownTxt;
 
@@ -109,55 +106,64 @@ public class UI : MonoBehaviour
     }
     public void Play()
     {
+        audioManager.PlayButtonClick();
         SkipMenu=true;
         MainMenu.SetActive(false);
         modesPanel.SetActive(true);
     }
     public void SurvivalWarning()
     {
+        audioManager.PlayButtonClick();
         modesPanel.SetActive(false);
         informationPanel.SetActive(true);
         survivalInformation.SetActive(true);
     }
     public void CloseSurvivalWarning()
     {
+        audioManager.PlayButtonClick();
         informationPanel.SetActive(false);
         survivalInformation.SetActive(false);
     }
     public void ChallengeWarning()
     {
+        audioManager.PlayButtonClick();
         modesPanel.SetActive(false);
         informationPanel.SetActive(true);
         challengeInformation.SetActive(true);
     }
     public void CloseChallengeWarning()
     {
-
+        audioManager.PlayButtonClick();
         informationPanel.SetActive(false);
         challengeInformation.SetActive(false);
     }
     public void EliminationWarning()
     {
+        audioManager.PlayButtonClick();
         modesPanel.SetActive(false);
         informationPanel.SetActive(true);
         eliminationInformation.SetActive(true);
     }
     public void CloseEliminationWarning()
     {
+        audioManager.PlayButtonClick();
         informationPanel.SetActive(false);
         eliminationInformation.SetActive(false);
     }
     public void Quit()
     {
+        audioManager.PlayButtonClick();
         Application.Quit();
     }
     public void ShowPausePanel()
     {
+        audioManager.PlayButtonClick();
         pausePanel.SetActive(true);
         Time.timeScale=0f;
     }
     public void ShowSettings()
     {
+        audioManager.PlayButtonClick();
         GameOver.SetActive(false);
         if(Application.isMobilePlatform)
             MobileControlPanel.SetActive(false);
@@ -166,22 +172,26 @@ public class UI : MonoBehaviour
     }
     public void Home()
     {
+        audioManager.PlayButtonClick();
         showMainMenu();
         
     }
     public void NewGame()
     {
+        audioManager.PlayButtonClick();
         ShowModes=true;
         SkipMenu=true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void Replay()
     {
+        audioManager.PlayButtonClick();
         SkipMenu=true;
         AdsManager.Instance.ShowRetryAd();
     }
     public void Resume()
     {
+        audioManager.PlayButtonClick();
         pausePanel.SetActive(false);
         StartCoroutine(ResumeTimer());
     }
@@ -221,6 +231,7 @@ public class UI : MonoBehaviour
     }
     public void ContinueButton()
     {
+        
         continuePanel.SetActive(false);
         AdsManager.Instance.PlayRewardedAd();
     }
@@ -237,6 +248,7 @@ public class UI : MonoBehaviour
     }
     public void ShowControls()
     {
+        audioManager.PlayButtonClick();
         KeyboardControlsPanel.SetActive(true);
         Time.timeScale=0f;
     }

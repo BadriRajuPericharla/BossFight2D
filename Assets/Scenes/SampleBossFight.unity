@@ -2367,6 +2367,7 @@ MonoBehaviour:
   JumpClip: {fileID: 8300000, guid: 5f7eac1079e72d6479f66eb706fe97d4, type: 3}
   PlayerDieClip: {fileID: 8300000, guid: adfcb6f2aeec1ca45a557d23fc600e25, type: 3}
   SpecialAttackClip: {fileID: 8300000, guid: 7ec34c609760f364f87365c89658a334, type: 3}
+  buttonClick: {fileID: 8300000, guid: a3532b2483a3cb844825c43d39994d03, type: 3}
 --- !u!4 &232129325
 Transform:
   m_ObjectHideFlags: 0
@@ -8910,8 +8911,9 @@ MonoBehaviour:
   chilEnemyController:
   - {fileID: 4436786117707634916}
   - {fileID: 449829882}
-  modesManager: {fileID: 0}
+  modesManager: {fileID: 2082430935}
   spikesScript: {fileID: 7241197473565417497, guid: a7249d4f0373fc54db22a5f84cbb49a9, type: 3}
+  audioManager: {fileID: 232129324}
   countDownTxt: {fileID: 1587752843}
 --- !u!224 &448046141
 RectTransform:
@@ -9747,7 +9749,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -4.2134474e-10, y: 0.0000000073947577, z: 6.135539e-16, w: 1}
-  m_LocalPosition: {x: -18.432804, y: 3.044323, z: -10}
+  m_LocalPosition: {x: -18.855446, y: 3.0393858, z: -10}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
