@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Attack()
     {
+        animator.SetTrigger("IsAttack");
         audioManager.SwordAttack();
     }
     
@@ -49,27 +50,9 @@ public class PlayerMovement : MonoBehaviour
             JumpCount++;
             
         }
-        if (canAttack)
+        if (canAttack && Input.GetKeyDown(KeyCode.E))
         {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                knifeAttack=true;
-                
-            }
-            if (Input.GetKeyUp(KeyCode.E))
-            {
-                knifeAttack=false;
-            }
-        }
-        
-
-        if (knifeAttack)
-        {
-            animator.SetBool("IsAttack",true);
-        }
-        if (!knifeAttack)
-        {
-            animator.SetBool("IsAttack",false);
+            Attack();
         }
         
 
