@@ -18,13 +18,6 @@ public class AudioManager : MonoBehaviour
     {
         audioSource=GetComponent<AudioSource>();
     }
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            Win();
-        }
-    }
     public void Win()
     {
         audioSource.PlayOneShot(WinClip);

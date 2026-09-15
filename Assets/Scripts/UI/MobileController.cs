@@ -10,14 +10,19 @@ public class MobileController : MonoBehaviour
     [SerializeField]private UI uI;
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (!Application.isMobilePlatform)
         {
-            uI.ShowPausePanel();
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                uI.ShowPausePanel();
+            }
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                uI.ShowSettings();
+            }
         }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            uI.ShowSettings();
-        }
+        else
+            return;
     }
 
     public void leftmove()
@@ -42,10 +47,6 @@ public class MobileController : MonoBehaviour
         {
             playerMovement.knifeAttack=true;
         }
-    }
-    public void stopKnife()
-    {
-        playerMovement.knifeAttack=false;
     }
     public void BulletsAttack()
     {
