@@ -7,19 +7,19 @@ using UnityEngine.Rendering;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] float Speed = 10f;
-    [SerializeField] float JumpForce = 15f;
-    [SerializeField] private float Gravity = 20f;
-    [SerializeField] private float fallGravity = 35f;
-    [SerializeField] int JumpCount = 0;
-    [SerializeField] private GameObject FirePoint;
-    [SerializeField] private Animator animator;
-    [SerializeField] private AudioManager audioManager;
+    [SerializeField]private float Speed = 10f;
+    [SerializeField]private float JumpForce = 15f;
+    [SerializeField]private float Gravity = 20f;
+    [SerializeField]private float fallGravity = 35f;
+    [SerializeField]private int JumpCount = 0;
+    [SerializeField]private GameObject FirePoint;
+    [SerializeField]private Animator animator;
+    [SerializeField]private AudioManager audioManager;
 
     public bool canAttack = false;
     public bool isjumping = false;
 
-    Rigidbody2D Rb;
+    private Rigidbody2D Rb;
     public float MoveInput;
 
     public bool knifeAttack = false;
