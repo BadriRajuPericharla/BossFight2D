@@ -74,7 +74,7 @@ public class AdsManager : MonoBehaviour
     public void ShowRetryAd()
     {
         retryCount++;
-        if (retryCount>= 3 &&interstitial != null &&interstitial.CanShowAd())
+        if (retryCount>= 2 &&interstitial != null &&interstitial.CanShowAd())
         {
             retryCount = 0;
             interstitial.Show();

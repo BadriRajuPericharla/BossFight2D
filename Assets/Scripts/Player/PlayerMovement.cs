@@ -33,7 +33,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void Attack()
     {
-        Debug.Log("Sword Animation Event Called");
         audioManager.SwordAttack();
     }
 

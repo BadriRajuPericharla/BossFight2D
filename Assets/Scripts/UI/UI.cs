@@ -35,16 +35,8 @@ public class UI : MonoBehaviour
     [SerializeField]private AudioManager audioManager;
     [Header("Text")]
     [SerializeField]private TextMeshProUGUI countDownTxt;
-
-  
-    private static int continueCounter=0;
-
     static bool ShowModes=false;
-    
     static bool SkipMenu=false;
-    
-    
-    
     void Start()
     {  
         Time.timeScale = 0f;
@@ -197,25 +189,7 @@ public class UI : MonoBehaviour
     }
     public void ShowGameOver()
     {
-        continueCounter++;
-        if (continueCounter >= 2)
-        {
-            continueCounter=0;
-            AdsManager.Instance.ShowRewardedAd();
-        }
-        else
-        {
-            GameOver.SetActive(true);
-            if(Application.isMobilePlatform)
-                MobileControlPanel.SetActive(false);
-            healthBars.SetActive(false);
-            foreach(ChildEnemyController childEnemyController in chilEnemyController)
-            {
-                childEnemyController.enabled=false;
-            }
-        }
-        
-        
+        AdsManager.Instance.ShowRewardedAd(); 
     }
     public void CloseContinuePanel()
     {
