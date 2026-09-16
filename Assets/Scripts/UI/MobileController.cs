@@ -48,6 +48,10 @@ public class MobileController : MonoBehaviour
             playerMovement.knifeAttack=true;
         }
     }
+    public void stopKnifeAttack()
+    {
+        playerMovement.knifeAttack=false;
+    }
     public void BulletsAttack()
     {
         playerShoot.bullet=true;

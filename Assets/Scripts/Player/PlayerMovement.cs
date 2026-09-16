@@ -33,11 +33,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Attack()
     {
+        Debug.Log("Sword Animation Event Called");
         audioManager.SwordAttack();
-    }
-    public void StopKnifeAttack()
-    {
-        knifeAttack=false;
     }
 
     void Update()
@@ -65,7 +62,11 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                knifeAttack = true;
+                knifeAttack=true;
+            }
+            else if (Input.GetKeyUp(KeyCode.E))
+            {
+                knifeAttack=false;
             }
         }
 
