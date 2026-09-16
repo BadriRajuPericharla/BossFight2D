@@ -9749,7 +9749,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -4.2134474e-10, y: 0.0000000073947577, z: 6.135539e-16, w: 1}
-  m_LocalPosition: {x: -27.093357, y: 2.9431748, z: -10}
+  m_LocalPosition: {x: -27.085106, y: 2.9432693, z: -10}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12273,19 +12273,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 940378848}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 448046142}
-        m_TargetAssemblyTypeName: MobileController, Assembly-CSharp
-        m_MethodName: attckKnife
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &940378848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12340,11 +12328,35 @@ MonoBehaviour:
   - eventID: 2
     callback:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 448046142}
+          m_TargetAssemblyTypeName: MobileController, Assembly-CSharp
+          m_MethodName: attckKnife
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 3
     callback:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 448046142}
+          m_TargetAssemblyTypeName: MobileController, Assembly-CSharp
+          m_MethodName: stopKnifeAttack
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &983143197
 GameObject:
   m_ObjectHideFlags: 0
@@ -30450,7 +30462,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 146.8, y: 111}
+  m_AnchoredPosition: {x: 146.7998, y: 111}
   m_SizeDelta: {x: 168.9538, y: 143.6199}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1862405218
