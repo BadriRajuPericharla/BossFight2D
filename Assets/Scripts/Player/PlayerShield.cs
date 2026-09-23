@@ -27,7 +27,7 @@ public class PlayerShield : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R) && !shieldActivated)
+        if (Input.GetKeyDown(KeyCode.R) && !resetShield)
         {
             StartCoroutine(ActivateShield());
         }
